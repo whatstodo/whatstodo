@@ -1,24 +1,51 @@
 <template>
   <div class="view view-positions">
-    <Message :text="message" />
+    <Message v-if="message" :text="message" />
+    <Positions :items="positions" @select="selectPosition" />
+    <SignButton @click="sign" />
   </div>
 </template>
 
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
 import Message from '@/components/Message'
+import Positions from '@/components/Positions'
+import SignButton from '@/components/SignButton'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Message
+    Message,
+    Positions,
+    SignButton
+  },
+
+  computed: {
+    positions() {
+      return this.$store.getters['positions/withStatus'] || []
+    }
   },
 
   data() {
     return {
       contentId: 'positions',
-      message: 'Hallo'
+      message: null
+    }
+  },
+
+  created() {
+    this.$store.dispatch('users/load')
+    this.$store.dispatch('positions/load')
+  },
+
+  methods: {
+    selectPosition({ id, status }) {
+      this.$store.dispatch('selection/set', { id, status })
+    },
+
+    sign() {
+      this.$store.dispatch('sign')
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <PageHeader />
-    <RouterView />
+    <RouterView class="view" />
     <PageFooter />
   </div>
 </template>
@@ -17,3 +17,22 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  .view {
+    flex: 1;
+  }
+}
+</style>
