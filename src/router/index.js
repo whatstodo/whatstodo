@@ -1,28 +1,89 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/',
+    name: 'Positions',
+    component: () =>
+      import(
+        /* webpackChunkName: "view-positions" */ '@/views/ViewPositions.vue'
+      )
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: '/position/:id',
+    name: 'Position',
+    meta: { fullPage: true },
+    props: true,
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(
+        /* webpackChunkName: "view-positions" */ '@/views/ViewPosition.vue'
+      )
+  },
+  {
+    path: '/neu',
+    name: 'Add',
+    component: () =>
+      import(
+        /* webpackChunkName: "view-add-position" */ '@/views/ViewAddPosition.vue'
+      )
+  },
+  {
+    path: '/notizen',
+    name: 'Notes',
+    component: () =>
+      import(
+        /* webpackChunkName: "view-collection" */ '@/views/ViewCollection.vue'
+      )
+  },
+  {
+    path: '/suche',
+    name: 'Search',
+    component: () =>
+      import(/* webpackChunkName: "view-search" */ '@/views/ViewSearch.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () =>
+      import(/* webpackChunkName: "view-login" */ '@/views/ViewLogin.vue')
+  },
+  {
+    path: '/info',
+    name: 'Info',
+    component: () =>
+      import(/* webpackChunkName: "view-info" */ '@/views/ViewInfo.vue')
+  },
+  {
+    path: '/howto',
+    name: 'Howto',
+    component: () =>
+      import(/* webpackChunkName: "view-howto" */ '@/views/ViewHowto.vue')
+  },
+  {
+    path: '/teilnehmende',
+    name: 'Participants',
+    component: () =>
+      import(
+        /* webpackChunkName: "view-participants" */ '@/views/ViewParticipants.vue'
+      )
+  },
+  {
+    path: '/kontakt',
+    name: 'Contact',
+    component: () =>
+      import(/* webpackChunkName: "view-contact" */ '@/views/ViewContact.vue')
+  },
+  {
+    path: '/impressum',
+    name: 'Imprint',
+    component: () =>
+      import(/* webpackChunkName: "view-imprint" */ '@/views/ViewImprint.vue')
   }
-];
+]
 
-const router = new VueRouter({
+export default new VueRouter({
   routes
-});
-
-export default router;
+})
