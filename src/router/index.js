@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import ViewPositions from '@/views/ViewPositions'
 
 Vue.use(VueRouter)
 
@@ -7,10 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Positions',
-    component: () =>
-      import(
-        /* webpackChunkName: "view-positions" */ '@/views/ViewPositions.vue'
-      )
+    component: ViewPositions
   },
   {
     path: '/position/:id',
