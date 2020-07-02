@@ -1,34 +1,27 @@
-import { get } from './getters'
-import { remove, clear } from './mutations'
+import { get, items } from './getters'
+import { set, clear } from './mutations'
 
 export const selection = {
   namespaced: true,
 
   state: () => ({
-    byId: {
-      'faire-sprache': true,
-      'open-source-software': false
-    },
-    allIds: ['faire-sprache, open-source-software']
+    byId: {},
+    allIds: []
   }),
 
   getters: {
-    get
+    get,
+    items
   },
 
   mutations: {
-    remove,
     clear,
-
-    add(state, { id, status }) {
-      state.byId[id] = status
-      state.allIds = Object.keys(state.byId)
-    }
+    set
   },
 
   actions: {
-    add({ commit }, { positionId, status }) {
-      commit('add', { id: positionId, status })
+    set({ commit }, { id, status }) {
+      commit('set', { id, status })
     },
 
     clear({ commit }) {

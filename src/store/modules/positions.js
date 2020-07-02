@@ -1,5 +1,5 @@
 import { requireAll, slugify } from '@/utils'
-import { set, add } from './mutations'
+import { set, init } from './mutations'
 
 const data = requireAll(
   require.context('@/../content/positions', false, /\.ya?ml$/)
@@ -32,23 +32,23 @@ export const positions = {
       getters.items.map(el => ({
         ...el,
         signed: rootGetters['collection/includes'](el.id),
-        selected: rootGetters['selection/get'](el.id)
+        selected: rootGetters['selection/get'](el.id)?.status
       }))
   },
 
   mutations: {
     set,
-    add
+    init
   },
 
   actions: {
     load({ commit }) {
-      commit('set', data)
+      commit('init', data)
     },
 
     add({ commit }, data) {
       const id = slugify(data.title)
-      commit('add', { ...data, id })
+      commit('set', { ...data, id })
     }
   }
 }
