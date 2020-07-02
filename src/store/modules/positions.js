@@ -1,5 +1,5 @@
-import { requireAll } from '@/utils'
-import { set } from './mutations'
+import { requireAll, slugify } from '@/utils'
+import { set, add } from './mutations'
 
 const data = requireAll(
   require.context('@/../content/positions', false, /\.ya?ml$/)
@@ -17,7 +17,7 @@ export const positions = {
     /**
      * Return the positions with relational information.
      */
-    items: ({ allIds, byId }, getters, _rootState, rootGetters) =>
+    items: ({ allIds, byId }, _getters, _rootState, rootGetters) =>
       allIds.map(id => ({
         ...byId[id],
         signedBy: rootGetters['users/haveSigned'](id).map(user => user.id),
@@ -37,12 +37,18 @@ export const positions = {
   },
 
   mutations: {
-    set
+    set,
+    add
   },
 
   actions: {
     load({ commit }) {
       commit('set', data)
+    },
+
+    add({ commit }, data) {
+      const id = slugify(data.title)
+      commit('add', { ...data, id })
     }
   }
 }

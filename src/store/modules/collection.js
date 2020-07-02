@@ -1,4 +1,5 @@
 import { get, includes } from './getters'
+import { add, remove } from './mutations'
 
 export const collection = {
   namespaced: true,
@@ -14,5 +15,20 @@ export const collection = {
   getters: {
     get,
     includes
+  },
+
+  mutations: {
+    add,
+    remove
+  },
+
+  actions: {
+    add({ commit }, { positionId, note }) {
+      commit('add', { id: positionId, note })
+    },
+
+    remove({ commit }, positionId) {
+      commit('remove', positionId)
+    }
   }
 }
