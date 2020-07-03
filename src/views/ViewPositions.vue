@@ -15,16 +15,16 @@ import SignButton from '@/components/SignButton'
 export default {
   mixins: [ViewMixin],
 
+  provide() {
+    return {
+      contentId: this.contentId
+    }
+  },
+
   components: {
     Message,
     Positions,
     SignButton
-  },
-
-  computed: {
-    positions() {
-      return this.$store.getters['positions/withStatus'] || []
-    }
   },
 
   data() {
@@ -34,7 +34,14 @@ export default {
     }
   },
 
+  computed: {
+    positions() {
+      return this.$store.getters['positions/withStatus'] || []
+    }
+  },
+
   created() {
+    console.log('created')
     this.$store.dispatch('users/load')
     this.$store.dispatch('positions/load')
   },

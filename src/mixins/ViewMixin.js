@@ -1,4 +1,10 @@
 export default {
+  proivde() {
+    return {
+      contentId: this.contentId
+    }
+  },
+
   data() {
     return {
       contentId: null,
@@ -8,14 +14,13 @@ export default {
 
   computed: {
     content() {
-      return this.$store.state.content[this.contentId] || {}
+      const { contentId } = this
+      return (contentId && this.$store.getters['content/get'](contentId)) || {}
     }
   },
 
-  methods: {
-    loadContent() {
-      const { contentId } = this
-      contentId && this.$store('content/load', contentId)
-    }
+  created() {
+    const { contentId } = this
+    contentId && this.$store.dispatch('content/load', contentId)
   }
 }
