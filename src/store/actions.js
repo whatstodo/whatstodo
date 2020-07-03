@@ -1,13 +1,17 @@
 export default {
-  sign({ commit, getters }) {
+  sign({ commit, dispatch, state, getters }) {
     const selection = getters['selection/items']
+    const collection = state.collection.byId
+
     for (const { id, status } of selection) {
       if (status) {
-        commit('collection/set', { id, note: '' })
+        collection[id] = { id }
       } else {
-        commit('collection/remove', id)
+        delete collection[id]
       }
     }
+
+    dispatch('collection/update', collection)
     commit('selection/clear')
   }
 }

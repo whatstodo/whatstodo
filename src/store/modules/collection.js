@@ -1,15 +1,12 @@
 import { get, includes, items } from './getters'
-import { set, remove } from './mutations'
+import { init } from './mutations'
 
 export const collection = {
   namespaced: true,
 
   state: () => ({
-    byId: {
-      'faire-sprache': { note: 'aha' },
-      'open-source-software': { note: 'nö' }
-    },
-    allIds: ['faire-sprache', 'open-source-software']
+    byId: {},
+    allIds: []
   }),
 
   getters: {
@@ -19,17 +16,14 @@ export const collection = {
   },
 
   mutations: {
-    set,
-    remove
+    init
   },
 
   actions: {
-    add({ commit }, { positionId, note }) {
-      commit('set', { id: positionId, note })
-    },
-
-    remove({ commit }, positionId) {
-      commit('remove', positionId)
+    update({ commit, rootGetters }, data) {
+      commit('init', data)
+      const user = rootGetters['users/loggedIn']
+      commit('users/set', { ...user, collection: data }, { root: true })
     }
   }
 }

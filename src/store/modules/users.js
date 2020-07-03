@@ -1,6 +1,6 @@
 import { requireAll } from '@/utils'
-import { items } from './getters'
-import { set } from './mutations'
+import { get, items } from './getters'
+import { set, init } from './mutations'
 
 const data = requireAll(
   require.context('@/../content/users', false, /\.ya?ml$/)
@@ -15,25 +15,34 @@ export const users = {
   }),
 
   getters: {
+    get,
+
     items,
+
+    loggedIn(state) {
+      return state.byId['studio-super-future']
+    },
 
     haveSigned: (_state, getters) => positionId =>
       getters.items.filter(user => !!user.collection?.[positionId]),
 
     notes: (_state, getters) => positionId =>
-      getters.haveSigned(positionId).map(user => {
+      getters.haveSigned(positionId).reduce((result, user) => {
         const collectionEntry = user.collection[positionId]
-        return collectionEntry && { ...collectionEntry, userId: user.id }
-      })
+        return collectionEntry?.note
+          ? result.concat({ ...collectionEntry, userId: user.id })
+          : result
+      }, [])
   },
 
   mutations: {
-    set
+    set,
+    init
   },
 
   actions: {
     load({ commit }) {
-      commit('set', data)
+      commit('init', data)
     }
   }
 }
