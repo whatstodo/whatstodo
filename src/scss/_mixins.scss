@@ -1,7 +1,9 @@
 @import "./variables";
 
 @mixin content-item {
+  box-sizing: border-box;
   padding: $content-padding;
+  width: 100%;
   &:not(:last-child) {
     border-bottom: $line-width solid;
   }

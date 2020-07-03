@@ -29,8 +29,7 @@ export default {
 
   data() {
     return {
-      contentId: 'positions',
-      message: null
+      contentId: 'positions'
     }
   },
 
@@ -41,9 +40,13 @@ export default {
   },
 
   created() {
-    console.log('created')
     this.$store.dispatch('users/load')
     this.$store.dispatch('positions/load')
+  },
+
+  mounted() {
+    const { messageId } = this.$route.params
+    messageId && this.showMessage(messageId)
   },
 
   methods: {

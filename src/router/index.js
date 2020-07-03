@@ -23,6 +23,7 @@ const routes = [
   {
     path: '/neu',
     name: 'Add',
+    meta: { fullPage: true },
     component: () =>
       import(
         /* webpackChunkName: "view-add-position" */ '@/views/ViewAddPosition.vue'

@@ -1,4 +1,4 @@
-import { requireAll, slugify } from '@/utils'
+import { requireAll, slugify, escape } from '@/utils'
 import { set, init } from './mutations'
 
 const data = requireAll(
@@ -48,6 +48,9 @@ export const positions = {
 
     add({ commit }, data) {
       const id = slugify(data.title)
+      for (const [key, value] of Object.entries(data)) {
+        data[key] = escape(value)
+      }
       commit('set', { ...data, id })
     }
   }

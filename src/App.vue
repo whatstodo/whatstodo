@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <PageHeader />
+    <PageHeader v-if="!fullPage" />
     <RouterView class="view" />
-    <PageFooter />
+    <PageFooter v-if="!fullPage" />
   </div>
 </template>
 
@@ -14,6 +14,12 @@ export default {
   components: {
     PageHeader,
     PageFooter
+  },
+
+  computed: {
+    fullPage() {
+      return this.$route.meta.fullPage
+    }
   }
 }
 </script>
