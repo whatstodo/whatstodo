@@ -1,13 +1,32 @@
 <template>
-  <div class="positions-item">
-    <div class="positions-icon" @click="select()" :class="{ enabled: status }">
-      O
+  <div class="positions-item" :class="{ expanded }">
+    <div class="positions-bar">
+      <div
+        class="positions-icon"
+        @click="select()"
+        :class="{ enabled: status }"
+      >
+        O
+      </div>
+      <div class="positions-heading">
+        <div class="positions-title" @click="toggleExpand">
+          {{ item.title }}
+        </div>
+        <div class="positions-detail" @click="toggleExpand">
+          <span>{{ signCount }}</span
+          >&nbsp;
+          <span>{{ noteCount }}</span>
+        </div>
+      </div>
     </div>
-    <div class="positions-bar" @click="expand()">
-      <div class="positions-title">{{ item.title }}</div>
-      <div class="positions-detail">
-        <span>{{ signCount }}</span>
+    <div class="positions-preview" v-if="expanded">
+      <div>
+        <span>{{ signCount }}</span
+        >&nbsp;
         <span>{{ noteCount }}</span>
+      </div>
+      <div class="positions-preview-text" @click="open">
+        {{ item.declaration }}
       </div>
     </div>
   </div>
@@ -16,7 +35,8 @@
 <script>
 export default {
   props: {
-    item: { type: Object, default: () => ({}) }
+    item: { type: Object, default: () => ({}) },
+    expanded: Boolean
   },
 
   computed: {
@@ -42,10 +62,20 @@ export default {
   },
 
   methods: {
-    expand() {},
+    toggleExpand() {
+      if (this.expanded) {
+        this.$emit('collapse')
+      } else {
+        this.$emit('expand')
+      }
+    },
 
     select() {
       this.$emit('select', !this.status)
+    },
+
+    open() {
+      this.$emit('open')
     }
   }
 }
@@ -54,7 +84,6 @@ export default {
 <style lang="scss">
 .positions {
   &-item {
-    display: flex;
     @include content-item;
   }
 
@@ -68,9 +97,13 @@ export default {
   }
 
   &-bar {
+    display: flex;
+  }
+
+  &-heading {
     flex: 1;
 
-    &:hover {
+    .positions-item:not(.expanded) &:hover {
       color: red;
 
       .positions-title {
@@ -85,6 +118,15 @@ export default {
 
   &-detail {
     display: none;
+  }
+
+  &-preview {
+    &-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   }
 }
 </style>

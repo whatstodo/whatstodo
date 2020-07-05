@@ -1,7 +1,11 @@
 <template>
   <div class="view view-positions">
     <Message v-if="message" :text="message" />
-    <Positions :items="positions" @select="selectPosition" />
+    <Positions
+      :items="positions"
+      @select="selectPosition"
+      @open="openPosition"
+    />
     <SignButton @click="sign" />
   </div>
 </template>
@@ -52,6 +56,10 @@ export default {
   methods: {
     selectPosition({ id, status }) {
       this.$store.dispatch('selection/set', { id, status })
+    },
+
+    openPosition(id) {
+      this.$router.push({ name: 'Position', params: { id } })
     },
 
     sign() {

@@ -8,7 +8,11 @@
       v-for="item of items"
       :key="item.id"
       :item="item"
+      :expanded="expandedItem === item"
       @select="select(item, $event)"
+      @open="open(item)"
+      @expand="expandedItem = item"
+      @collapse="expandedItem = null"
     />
   </div>
 </template>
@@ -28,9 +32,19 @@ export default {
     items: { type: Array, required: true }
   },
 
+  data() {
+    return {
+      expandedItem: null
+    }
+  },
+
   methods: {
     select({ id }, status) {
       this.$emit('select', { id, status })
+    },
+
+    open({ id }) {
+      this.$emit('open', id)
     }
   }
 }
