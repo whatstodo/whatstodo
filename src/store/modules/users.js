@@ -29,8 +29,14 @@ export const users = {
     notes: (_state, getters) => positionId =>
       getters.haveSigned(positionId).reduce((result, user) => {
         const collectionEntry = user.collection[positionId]
+        const userId = user.id
         return collectionEntry?.note
-          ? result.concat({ ...collectionEntry, userId: user.id })
+          ? result.concat({
+              ...collectionEntry,
+              userId,
+              positionId,
+              id: `${userId}/${positionId}`
+            })
           : result
       }, [])
   },

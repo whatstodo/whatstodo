@@ -32,10 +32,26 @@ body {
   margin: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: inherit;
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+}
+
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+
+  line-height: $line-height;
 
   .view {
     flex: 1;

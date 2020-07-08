@@ -14,15 +14,16 @@ export const positions = {
   }),
 
   getters: {
+    item: ({ byId }, _getters, _rootState, rootGetters) => id => ({
+      ...byId[id],
+      signedBy: rootGetters['users/haveSigned'](id).map(user => user.id),
+      notes: rootGetters['users/notes'](id)
+    }),
+
     /**
      * Return the positions with relational information.
      */
-    items: ({ allIds, byId }, _getters, _rootState, rootGetters) =>
-      allIds.map(id => ({
-        ...byId[id],
-        signedBy: rootGetters['users/haveSigned'](id).map(user => user.id),
-        notes: rootGetters['users/notes'](id)
-      })),
+    items: ({ allIds }, getters) => allIds.map(getters.item),
 
     /**
      * Return the positions list with relational information and their current
