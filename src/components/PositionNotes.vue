@@ -2,13 +2,19 @@
   <div class="position-notes">
     <div class="position-note" v-for="note of notes" :key="note.id">
       <div>* {{ getUserName(note.userId) }}, {{ note.date }}</div>
-      <div>{{ note.note }}</div>
+      <Markdown :text="note.note" />
     </div>
   </div>
 </template>
 
 <script>
+import Markdown from '@/components/Markdown'
+
 export default {
+  components: {
+    Markdown
+  },
+
   props: {
     positionId: String
   },
@@ -30,3 +36,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.position-notes {
+  p {
+    margin: 0;
+  }
+}
+</style>

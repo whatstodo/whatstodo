@@ -36,10 +36,6 @@ export default {
     margin-top: $line-height;
   }
 
-  p {
-    margin: 0;
-  }
-
   ul {
     margin-bottom: $line-height;
   }
