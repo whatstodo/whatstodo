@@ -25,15 +25,23 @@
         >&nbsp;
         <span>{{ noteCount }}</span>
       </div>
-      <div class="positions-preview-text" @click="open">
-        {{ item.declaration }}
-      </div>
+      <Markdown
+        class="positions-preview-text"
+        :text="item.declaration"
+        @click="open"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Markdown from '@/components/Markdown'
+
 export default {
+  components: {
+    Markdown
+  },
+
   props: {
     item: { type: Object, default: () => ({}) },
     expanded: Boolean
