@@ -1,9 +1,15 @@
 <template>
-  <div class="message" v-html="text"></div>
+  <Markdown class="message" :text="text" />
 </template>
 
 <script>
+import Markdown from '@/components/Markdown'
+
 export default {
+  components: {
+    Markdown
+  },
+
   props: {
     text: {
       type: String,
