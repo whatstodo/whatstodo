@@ -1,5 +1,5 @@
 <template>
-  <component :is="'div'" v-html="html" />
+  <component :is="'div'" v-html="html" v-on="$listeners" />
 </template>
 
 <script>
