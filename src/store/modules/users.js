@@ -20,7 +20,7 @@ export const users = {
     items,
 
     loggedIn(state) {
-      return state.byId['studio-super-future']
+      return state.byId['user']
     },
 
     haveSigned: (_state, getters) => positionId =>
