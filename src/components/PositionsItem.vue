@@ -134,6 +134,16 @@ export default {
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
+
+      // Remove margin and only display the first child, otherwise line-clamp
+      // wont work correctly.
+      p {
+        margin: 0;
+      }
+
+      *:not(:first-child) {
+        display: none;
+      }
     }
   }
 }
