@@ -1,6 +1,6 @@
 <template>
   <div class="view view-position">
-    <div class="heading">{{ id }}</div>
+    <div class="heading">{{ position.title }}</div>
     <main class="view-position-content">
       <PositonContent :positionId="id" />
       <PositionSigned :positionId="id" />
