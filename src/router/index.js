@@ -31,7 +31,7 @@ const routes = [
   },
   {
     path: '/notizen',
-    name: 'Notes',
+    name: 'Collection',
     component: () =>
       import(
         /* webpackChunkName: "view-collection" */ '@/views/ViewCollection.vue'
