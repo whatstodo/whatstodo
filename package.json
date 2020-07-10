@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "reset-bela": "git reset origin/master"
+    "reset-bela": "git reset --hard origin/master"
   },
   "dependencies": {
     "core-js": "^3.6.5",
