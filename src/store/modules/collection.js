@@ -1,5 +1,6 @@
-import { get, includes, items } from './getters'
-import { init } from './mutations'
+import { formatDate } from '@/utils'
+import { includes } from './getters'
+import { init, setProp } from './mutations'
 
 export const collection = {
   namespaced: true,
@@ -10,13 +11,27 @@ export const collection = {
   }),
 
   getters: {
-    get,
     includes,
-    items
+
+    items: ({ allIds }, getters) => allIds.map(getters.item),
+
+    item: ({ byId }, _getters, rootState) => id => ({
+      ...byId[id],
+      position: rootState.positions.byId[id]
+    })
   },
 
   mutations: {
-    init
+    init,
+    setProp,
+
+    saveDraft({ allIds, byId }) {
+      const date = formatDate(new Date())
+      for (const id of allIds) {
+        const item = byId[id]
+        byId[id] = { ...item, note: item.draft, draft: null, date }
+      }
+    }
   },
 
   actions: {
@@ -24,6 +39,10 @@ export const collection = {
       commit('init', data)
       const user = rootGetters['users/loggedIn']
       commit('users/set', { ...user, collection: data }, { root: true })
+    },
+
+    publish({ commit }) {
+      commit('saveDraft')
     }
   }
 }

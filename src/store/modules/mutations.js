@@ -6,6 +6,11 @@ export const set = (state, item) => {
   state.allIds = Object.keys(state.byId)
 }
 
+export const setProp = (state, { id, key, value }) => {
+  const item = state.byId[id]
+  item && Vue.set(state.byId, id, { ...item, [key]: value })
+}
+
 export const init = (state, data) => {
   state.byId = data
   state.allIds = Object.keys(data)

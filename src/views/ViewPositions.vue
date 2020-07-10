@@ -62,8 +62,9 @@ export default {
       this.$router.push({ name: 'Position', params: { id } })
     },
 
-    sign() {
-      this.$store.dispatch('sign')
+    async sign() {
+      await this.$store.dispatch('sign')
+      this.$router.push({ name: 'Collection' })
     }
   }
 }

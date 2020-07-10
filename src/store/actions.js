@@ -5,7 +5,7 @@ export default {
 
     for (const { id, status } of selection) {
       if (status) {
-        collection[id] = { id }
+        collection[id] = { id, note: null, draft: null }
       } else {
         delete collection[id]
       }
