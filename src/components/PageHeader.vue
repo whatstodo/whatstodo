@@ -1,22 +1,36 @@
 <template>
   <header class="page-header">
-    <div class="left">
-      <router-link :to="{ name: 'Positions' }">Whatstodo.design</router-link>
-    </div>
-    <div class="right">
-      <router-link :to="{ name: 'Search' }">Suche</router-link>
-      <router-link :to="{ name: 'Login' }">Login</router-link>
-    </div>
+    <ButtonsBar>
+      <template slot="left">
+        <router-link :to="{ name: 'Positions' }">Whatstodo.design</router-link>
+      </template>
+      <template slot="right">
+        <router-link :to="{ name: 'Search' }">Suche</router-link>
+        <router-link v-if="isLoggedIn" :to="{ name: 'Account' }">{{
+          userName
+        }}</router-link>
+        <router-link v-else :to="{ name: 'Login' }">Login</router-link>
+      </template>
+    </ButtonsBar>
   </header>
 </template>
 
-<style lang="scss" scoped>
-.page-header {
-  display: flex;
-  justify-content: space-between;
+<script>
+import ButtonsBar from '@/components/ButtonsBar'
 
-  a:not(:last-child) {
-    margin-right: 0.5em;
+export default {
+  components: {
+    ButtonsBar
+  },
+
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn
+    },
+
+    userName() {
+      return this.isLoggedIn && this.$store.getters['users/loggedIn']?.name
+    }
   }
 }
-</style>
+</script>
