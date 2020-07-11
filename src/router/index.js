@@ -50,6 +50,28 @@ const routes = [
       import(/* webpackChunkName: "view-login" */ '@/views/ViewLogin.vue')
   },
   {
+    path: '/account',
+    name: 'Account',
+    component: () =>
+      import(/* webpackChunkName: "view-account" */ '@/views/ViewAccount.vue')
+  },
+  {
+    path: '/account/aendern',
+    name: 'Edit Account',
+    component: () =>
+      import(
+        /* webpackChunkName: "view-account-edit" */ '@/views/ViewAccountEdit.vue'
+      )
+  },
+  {
+    path: '/account/loeschen',
+    name: 'Delete Account',
+    component: () =>
+      import(
+        /* webpackChunkName: "view-account-delete" */ '@/views/ViewAccountDelete.vue'
+      )
+  },
+  {
     path: '/info',
     name: 'Info',
     component: () =>

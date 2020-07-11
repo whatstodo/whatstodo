@@ -1,0 +1,9 @@
+heading: Konto löschen
+
+messages:
+  hint: |
+    Mit dem [Löschen deines Kontos](#/howtodo) werden alle deine Daten entfernt. Bist du dir sicher?
+  delete_success:
+    Dein Profil wurde gelöscht. Mach’s Gut!
+
+delete_confirm: Löschen

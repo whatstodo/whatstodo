@@ -3,7 +3,7 @@
     <div class="collection-item-title">{{ position.title }}</div>
     <textarea
       :placeholder="content.add_note"
-      :value="draft.note"
+      :value="note"
       @input="setDraft('note', $event.target.value)"
     ></textarea>
   </div>
@@ -30,6 +30,10 @@ export default {
 
     draft() {
       return this.item.draft || {}
+    },
+
+    note() {
+      return this.draft.note ?? this.item.note
     }
   },
 

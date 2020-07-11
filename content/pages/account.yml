@@ -1,0 +1,13 @@
+heading: Deine Daten
+
+messages:
+  change_data_successful: |
+    Deine Daten wurden gespeichert. Eine Bestätigung wurde an deine E-Mail-Adresse gesendet.
+
+change_data: Daten ändern
+
+save_data: Speichern
+
+delete_profile: Konto löschen
+
+logout: Abmelden
