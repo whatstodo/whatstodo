@@ -29,7 +29,7 @@ export const collection = {
       const date = formatDate(new Date())
       for (const id of allIds) {
         const item = byId[id]
-        byId[id] = { ...item, note: item.draft, draft: null, date }
+        byId[id] = { ...item, note: item.draft, date }
       }
     }
   },
