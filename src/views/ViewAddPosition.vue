@@ -38,7 +38,7 @@ export default {
       this.$store.dispatch('positions/add', this.data)
       this.$router.push({
         name: 'Positions',
-        params: { messageId: 'published' }
+        params: { messageId: 'position_successful' }
       })
     }
   }

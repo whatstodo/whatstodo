@@ -38,8 +38,12 @@ export default {
   },
 
   methods: {
-    checkout() {
-      this.$store.dispatch('collection/publish')
+    async checkout() {
+      await this.$store.dispatch('collection/publish')
+      this.$router.push({
+        name: 'Positions',
+        params: { messageId: 'checkout_successful' }
+      })
     }
   }
 }

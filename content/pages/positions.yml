@@ -1,7 +1,9 @@
 title: Positions
 
 messages:
-  published: |
+  position_successful: |
     Deine Position wurde eingereicht. Nach kurzer Prüfung wird die Position veröffentlicht und du erhältst eine Bestätigung per Email.
+  checkout_successful: |
+    Deine Notizen wurden veröffentlicht.
 
 addPosition: Position hinzufügen
