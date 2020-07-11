@@ -1,5 +1,5 @@
-import { get, items } from './getters'
-import { set, clear } from './mutations'
+import { item, items } from './getters'
+import { setItem, clear } from './mutations'
 
 export const selection = {
   namespaced: true,
@@ -10,22 +10,12 @@ export const selection = {
   }),
 
   getters: {
-    get,
+    item,
     items
   },
 
   mutations: {
     clear,
-    set
-  },
-
-  actions: {
-    set({ commit }, { id, status }) {
-      commit('set', { id, status })
-    },
-
-    clear({ commit }) {
-      commit('clear')
-    }
+    setItem
   }
 }

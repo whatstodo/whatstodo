@@ -1,6 +1,6 @@
 import { formatDate } from '@/utils'
-import { includes } from './getters'
-import { init, setProp } from './mutations'
+import { includes, modified } from './getters'
+import { setItems, setProp, setDraft, applyDraft } from './mutations'
 
 export const collection = {
   namespaced: true,
@@ -12,6 +12,7 @@ export const collection = {
 
   getters: {
     includes,
+    modified,
 
     items: ({ allIds }, getters) => allIds.map(getters.item),
 
@@ -22,27 +23,27 @@ export const collection = {
   },
 
   mutations: {
-    init,
+    setItems,
     setProp,
-
-    saveDraft({ allIds, byId }) {
-      const date = formatDate(new Date())
-      for (const id of allIds) {
-        const item = byId[id]
-        byId[id] = { ...item, note: item.draft, date }
-      }
-    }
+    setDraft,
+    applyDraft
   },
 
   actions: {
     update({ commit, rootGetters }, data) {
-      commit('init', data)
+      commit('setItems', data)
       const user = rootGetters['users/loggedIn']
-      commit('users/set', { ...user, collection: data }, { root: true })
+      commit('users/setItem', { ...user, collection: data }, { root: true })
     },
 
-    publish({ commit }) {
-      commit('saveDraft')
+    publish({ commit, state, getters }) {
+      const date = formatDate(new Date())
+      for (const id of state.allIds) {
+        if (getters['modified'](id)) {
+          commit('applyDraft', id)
+          commit('setProp', { id, key: 'date', value: date })
+        }
+      }
     }
   }
 }

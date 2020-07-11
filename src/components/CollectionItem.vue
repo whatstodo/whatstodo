@@ -1,7 +1,11 @@
 <template>
   <div class="collection-item">
     <div class="collection-item-title">{{ position.title }}</div>
-    <textarea :placeholder="content.add_note" v-model="noteDraft"></textarea>
+    <textarea
+      :placeholder="content.add_note"
+      :value="draft.note"
+      @input="setDraft('note', $event.target.value)"
+    ></textarea>
   </div>
 </template>
 
@@ -24,28 +28,18 @@ export default {
       return this.item.position || {}
     },
 
-    noteDraft: {
-      get() {
-        return this.item.draft
-      },
-
-      set(value) {
-        this.updateDraft(value)
-      }
+    draft() {
+      return this.item.draft || {}
     }
   },
 
   mounted() {
-    this.updateDraft(this.item.note)
+    this.setDraft('note', this.item.note)
   },
 
   methods: {
-    updateDraft(value) {
-      this.$store.commit('collection/setProp', {
-        id: this.id,
-        key: 'draft',
-        value
-      })
+    setDraft(key, value) {
+      this.$store.commit('collection/setDraft', { id: this.id, key, value })
     }
   }
 }

@@ -1,5 +1,5 @@
 import { requireAll, slugify, escape } from '@/utils'
-import { set, init } from './mutations'
+import { setItem, setItems } from './mutations'
 
 const data = requireAll(
   require.context('@/../content/positions', false, /\.ya?ml$/)
@@ -14,6 +14,10 @@ export const positions = {
   }),
 
   getters: {
+    /**
+     * Return a position with relational information.
+     */
+
     item: ({ byId }, _getters, _rootState, rootGetters) => id => ({
       ...byId[id],
       signedBy: rootGetters['users/haveSigned'](id).map(user => user.id),
@@ -21,30 +25,30 @@ export const positions = {
     }),
 
     /**
-     * Return the positions with relational information.
+     * Return all positions with relational information.
      */
     items: ({ allIds }, getters) => allIds.map(getters.item),
 
     /**
-     * Return the positions list with relational information and their current
+     * Return all positions with relational information and their current
      * status for the logged in user.
      */
     withStatus: (_state, getters, _rootState, rootGetters) =>
       getters.items.map(el => ({
         ...el,
         signed: rootGetters['collection/includes'](el.id),
-        selected: rootGetters['selection/get'](el.id)?.status
+        selected: rootGetters['selection/item'](el.id)?.status
       }))
   },
 
   mutations: {
-    set,
-    init
+    setItem,
+    setItems
   },
 
   actions: {
     load({ commit }) {
-      commit('init', data)
+      commit('setItems', data)
     },
 
     add({ commit }, data) {
@@ -52,7 +56,7 @@ export const positions = {
       for (const [key, value] of Object.entries(data)) {
         data[key] = escape(value)
       }
-      commit('set', { ...data, id })
+      commit('setItem', { ...data, id })
     }
   }
 }

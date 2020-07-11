@@ -15,7 +15,7 @@ export default {
   computed: {
     content() {
       const { contentId } = this
-      return (contentId && this.$store.getters['content/get'](contentId)) || {}
+      return (contentId && this.$store.getters['content/item'](contentId)) || {}
     },
 
     messages() {
@@ -30,6 +30,11 @@ export default {
   created() {
     const { contentId } = this
     contentId && this.$store.dispatch('content/load', contentId)
+  },
+
+  mounted() {
+    const { messageId } = this.$route.params
+    messageId && this.showMessage(messageId)
   },
 
   methods: {

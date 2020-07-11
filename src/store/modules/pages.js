@@ -1,5 +1,5 @@
 import { requireAll } from '@/utils'
-import Vue from 'vue'
+import { setItem } from './mutations'
 
 const data = requireAll(
   require.context('@/../content/pages', false, /\.ya?ml$/)
@@ -14,16 +14,12 @@ export const pages = {
   }),
 
   mutations: {
-    add(state, item) {
-      const { id } = item
-      Vue.set(state.byId, id, item)
-      state.allIds.push(id)
-    }
+    setItem
   },
 
   actions: {
     load({ commit }, id) {
-      commit('add', data[id])
+      commit('setItem', data[id])
     }
   }
 }

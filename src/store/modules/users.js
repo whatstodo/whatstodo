@@ -1,6 +1,6 @@
 import { requireAll } from '@/utils'
-import { get, items } from './getters'
-import { set, init } from './mutations'
+import { item, items } from './getters'
+import { setItem, setItems, setDraft } from './mutations'
 
 const data = requireAll(
   require.context('@/../content/users', false, /\.ya?ml$/)
@@ -15,7 +15,7 @@ export const users = {
   }),
 
   getters: {
-    get,
+    item,
 
     items,
 
@@ -42,13 +42,14 @@ export const users = {
   },
 
   mutations: {
-    set,
-    init
+    setItem,
+    setItems,
+    setDraft
   },
 
   actions: {
     load({ commit }) {
-      commit('init', data)
+      commit('setItems', data)
     }
   }
 }

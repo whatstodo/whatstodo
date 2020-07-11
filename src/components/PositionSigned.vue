@@ -24,7 +24,7 @@ export default {
 
   methods: {
     getUserName(userId) {
-      return this.$store.getters['users/get'](userId)?.name
+      return this.$store.getters['users/item'](userId)?.name
     }
   }
 }

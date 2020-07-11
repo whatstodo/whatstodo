@@ -4,7 +4,7 @@ export default {
   computed: {
     content() {
       const contentId = this.contentId
-      return (contentId && this.$store.getters['content/get'](contentId)) || {}
+      return (contentId && this.$store.getters['content/item'](contentId)) || {}
     }
   }
 }

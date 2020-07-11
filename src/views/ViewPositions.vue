@@ -48,14 +48,9 @@ export default {
     this.$store.dispatch('positions/load')
   },
 
-  mounted() {
-    const { messageId } = this.$route.params
-    messageId && this.showMessage(messageId)
-  },
-
   methods: {
     selectPosition({ id, status }) {
-      this.$store.dispatch('selection/set', { id, status })
+      this.$store.commit('selection/setItem', { id, status })
     },
 
     openPosition(id) {
