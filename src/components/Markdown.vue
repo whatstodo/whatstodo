@@ -4,6 +4,7 @@
 
 <script>
 import marked from 'marked'
+import DOMPurify from 'dompurify'
 
 export default {
   props: {
@@ -12,7 +13,7 @@ export default {
 
   computed: {
     html() {
-      return marked(this.text || '')
+      return this.text && DOMPurify.sanitize(marked(this.text))
     }
   }
 }
