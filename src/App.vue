@@ -20,6 +20,10 @@ export default {
     fullPage() {
       return this.$route.meta.fullPage
     }
+  },
+
+  created() {
+    this.$store.dispatch('users/load')
   }
 }
 </script>
