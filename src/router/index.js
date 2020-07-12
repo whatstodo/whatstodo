@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ViewPositions from '@/views/ViewPositions'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -23,7 +24,7 @@ const routes = [
   {
     path: '/neu',
     name: 'Add',
-    meta: { fullPage: true },
+    meta: { auth: true, permissionHint: true, fullPage: true },
     component: () =>
       import(
         /* webpackChunkName: "view-add-position" */ '@/views/ViewAddPosition.vue'
@@ -32,6 +33,7 @@ const routes = [
   {
     path: '/notizen',
     name: 'Collection',
+    meta: { auth: true, permissionHint: true },
     component: () =>
       import(
         /* webpackChunkName: "view-collection" */ '@/views/ViewCollection.vue'
@@ -50,14 +52,22 @@ const routes = [
       import(/* webpackChunkName: "view-login" */ '@/views/ViewLogin.vue')
   },
   {
+    path: '/logout',
+    name: 'Logout',
+    component: () =>
+      import(/* webpackChunkName: "view-logout" */ '@/views/ViewLogout.vue')
+  },
+  {
     path: '/account',
     name: 'Account',
+    meta: { auth: true },
     component: () =>
       import(/* webpackChunkName: "view-account" */ '@/views/ViewAccount.vue')
   },
   {
     path: '/account/aendern',
     name: 'Edit Account',
+    meta: { auth: true },
     component: () =>
       import(
         /* webpackChunkName: "view-account-edit" */ '@/views/ViewAccountEdit.vue'
@@ -66,6 +76,7 @@ const routes = [
   {
     path: '/account/loeschen',
     name: 'Delete Account',
+    meta: { auth: true },
     component: () =>
       import(
         /* webpackChunkName: "view-account-delete" */ '@/views/ViewAccountDelete.vue'
@@ -105,6 +116,14 @@ const routes = [
   }
 ]
 
-export default new VueRouter({
-  routes
+const router = new VueRouter({ routes })
+
+router.beforeEach(function(to, _from, next) {
+  if (to.meta.auth && !store.state.isLoggedIn) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
 })
+
+export default router

@@ -1,12 +1,6 @@
 import { requireAll } from '@/utils'
-import { item, items } from './getters'
-import {
-  setItem,
-  setItems,
-  removeItem,
-  setDraft,
-  applyDraft
-} from './mutations'
+import * as getters from './getters'
+import * as mutations from './mutations'
 
 const data = requireAll(
   require.context('@/../content/users', false, /\.ya?ml$/)
@@ -21,9 +15,7 @@ export const users = {
   }),
 
   getters: {
-    item,
-
-    items,
+    ...getters,
 
     loggedIn(state) {
       return state.byId['user']
@@ -48,11 +40,7 @@ export const users = {
   },
 
   mutations: {
-    setItem,
-    setItems,
-    removeItem,
-    setDraft,
-    applyDraft
+    ...mutations
   },
 
   actions: {
@@ -64,9 +52,9 @@ export const users = {
       commit('applyDraft', 'user')
     },
 
-    deleteAccount({ commit }) {
+    deleteAccount({ commit, dispatch }) {
       commit('removeItem', 'user')
-      commit('logout', null, { root: true })
+      dispatch('logout', null, { root: true })
     }
   }
 }

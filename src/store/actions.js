@@ -13,5 +13,11 @@ export default {
 
     dispatch('collection/update', collection)
     commit('selection/clear')
+  },
+
+  logout({ commit }) {
+    commit('logout')
+    commit('collection/clear')
+    commit('users/setProp', { id: 'user', key: 'collection', value: {} })
   }
 }

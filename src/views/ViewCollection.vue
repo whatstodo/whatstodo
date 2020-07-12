@@ -37,6 +37,12 @@ export default {
     }
   },
 
+  mounted() {
+    if (this.$route.params.sign) {
+      this.$store.dispatch('sign')
+    }
+  },
+
   methods: {
     async checkout() {
       await this.$store.dispatch('collection/publish')

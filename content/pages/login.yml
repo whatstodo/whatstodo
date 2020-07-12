@@ -1,0 +1,11 @@
+heading: Login
+
+messages:
+  login_required: |
+    Um eine Position [hinzuzufügen](#/howtodo)  oder [Positionen zu unterzeichnen](#/howtodo), musst du dich anmelden.
+
+login: Anmelden
+
+new_account: Registrieren
+
+new_password: Passwort vergessen

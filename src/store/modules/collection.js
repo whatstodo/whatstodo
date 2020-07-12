@@ -1,6 +1,6 @@
 import { formatDate } from '@/utils'
-import { includes, modified } from './getters'
-import { setItems, setProp, setDraft, applyDraft } from './mutations'
+import * as getters from './getters'
+import * as mutations from './mutations'
 
 export const collection = {
   namespaced: true,
@@ -11,8 +11,7 @@ export const collection = {
   }),
 
   getters: {
-    includes,
-    modified,
+    ...getters,
 
     items: ({ allIds }, getters) => allIds.map(getters.item),
 
@@ -23,10 +22,7 @@ export const collection = {
   },
 
   mutations: {
-    setItems,
-    setProp,
-    setDraft,
-    applyDraft
+    ...mutations
   },
 
   actions: {

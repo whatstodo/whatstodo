@@ -15,9 +15,7 @@
         }}</RouterLink>
       </template>
       <template slot="right">
-        <RouterLink :to="{ name: 'Positions' }">{{
-          content.logout
-        }}</RouterLink>
+        <RouterLink :to="{ name: 'Logout' }">{{ content.logout }}</RouterLink>
       </template>
     </ButtonsBar>
   </div>

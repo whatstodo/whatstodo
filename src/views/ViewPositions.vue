@@ -58,8 +58,10 @@ export default {
     },
 
     async sign() {
-      await this.$store.dispatch('sign')
-      this.$router.push({ name: 'Collection' })
+      this.$router.push({
+        name: 'Collection',
+        params: { sign: true }
+      })
     }
   }
 }
