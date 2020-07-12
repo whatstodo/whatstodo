@@ -2,6 +2,6 @@ heading: Position hinzufügen
 
 messages:
   hint: |
-    Verfasse eine neue Position! Mit der Veröffentlichung unterzeichnest du diese automatisch und erklärst dich mit dem Selbstverständnis von whatstodo.design einverstanden.
+    Verfasse eine neue Position! Mit der Veröffentlichung unterzeichnest du diese automatisch, erklärst du dich mit dem [Selbstverständnis](#/info) von whatstodo einverstanden und bestätigst, dass du unser [Howtodo](#/howtodo) beachtest.
 
 publish: Veröffentlichen
