@@ -58,6 +58,12 @@ const routes = [
       import(/* webpackChunkName: "view-logout" */ '@/views/ViewLogout.vue')
   },
   {
+    path: '/passwort',
+    name: 'New Password',
+    component: () =>
+      import(/* webpackChunkName: "view-password" */ '@/views/ViewPassword.vue')
+  },
+  {
     path: '/account',
     name: 'Account',
     meta: { auth: true },

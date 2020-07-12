@@ -9,7 +9,7 @@
         <RouterLink :to="{ name: 'Delete Account' }">{{
           content.new_account
         }}</RouterLink>
-        <RouterLink :to="{ name: 'Edit Account' }">{{
+        <RouterLink :to="{ name: 'New Password' }">{{
           content.new_password
         }}</RouterLink>
       </template>
