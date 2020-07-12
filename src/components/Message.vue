@@ -19,8 +19,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .message {
   @include content-item;
+  @include font-size-medium;
+  padding-top: 0;
+
+  p {
+    margin: 0;
+  }
 }
 </style>

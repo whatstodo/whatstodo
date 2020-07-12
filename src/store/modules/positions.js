@@ -14,14 +14,22 @@ export const positions = {
   }),
 
   getters: {
+    modified: (_state, _getters, _rootState, rootGetters) => id => {
+      const users = rootGetters['users/haveSigned'](id)
+      const user = users.reduce((prev, current) =>
+        current.collection[id].date > prev.collection[id].date ? current : prev
+      )
+      return user.collection[id].date
+    },
+
     /**
      * Return a position with relational information.
      */
-
-    item: ({ byId }, _getters, _rootState, rootGetters) => id => ({
+    item: ({ byId }, getters, _rootState, rootGetters) => id => ({
       ...byId[id],
       signedBy: rootGetters['users/haveSigned'](id).map(user => user.id),
-      notes: rootGetters['users/notes'](id)
+      notes: rootGetters['users/notes'](id),
+      modified: getters['modified'](id)
     }),
 
     /**

@@ -1,32 +1,35 @@
 <template>
   <div class="positions-item" :class="{ expanded }">
-    <div class="positions-bar">
+    <div class="positions-icon" @click="select()" :class="{ enabled: status }">
+      O
+    </div>
+    <div class="positions-content">
       <div
-        class="positions-icon"
-        @click="select()"
-        :class="{ enabled: status }"
+        class="positions-bar"
+        @mouseenter="hovered = true"
+        @mouseleave="hovered = false"
       >
-        O
-      </div>
-      <div class="positions-heading">
-        <div class="positions-title" @click="toggleExpand">
+        <div
+          class="positions-title"
+          v-show="expanded || !hovered"
+          @click="toggleExpand"
+        >
           {{ item.title }}
         </div>
-        <div class="positions-detail" @click="toggleExpand">
-          <span>{{ signCount }}</span
-          >&nbsp;
+        <div
+          class="positions-detail"
+          v-show="expanded || hovered"
+          @click="toggleExpand"
+        >
+          <span>{{ signCount }}</span>
           <span>{{ noteCount }}</span>
+          <span>{{ dateCreated }}</span>
+          <span>{{ dateModified }}</span>
         </div>
       </div>
-    </div>
-    <div class="positions-preview" v-if="expanded">
-      <div>
-        <span>{{ signCount }}</span
-        >&nbsp;
-        <span>{{ noteCount }}</span>
-      </div>
       <Markdown
-        class="positions-preview-text"
+        class="positions-preview"
+        v-if="expanded"
         :text="item.declaration"
         @click="open"
       />
@@ -35,6 +38,7 @@
 </template>
 
 <script>
+import { displayDate } from '@/utils'
 import Markdown from '@/components/Markdown'
 
 export default {
@@ -45,6 +49,12 @@ export default {
   props: {
     item: { type: Object, default: () => ({}) },
     expanded: Boolean
+  },
+
+  data() {
+    return {
+      hovered: false
+    }
   },
 
   computed: {
@@ -66,6 +76,14 @@ export default {
 
     signCount() {
       return this.item.signedBy?.length
+    },
+
+    dateCreated() {
+      return displayDate(this.item.date)
+    },
+
+    dateModified() {
+      return displayDate(this.item.modified)
     }
   },
 
@@ -92,7 +110,16 @@ export default {
 <style lang="scss">
 .positions {
   &-item {
+    display: flex;
+
     @include content-item;
+
+    &.expanded {
+      .positions-detail {
+        cursor: default;
+        @include font-size-medium;
+      }
+    }
   }
 
   &-icon {
@@ -104,46 +131,39 @@ export default {
     }
   }
 
-  &-bar {
-    display: flex;
+  &-content {
+    flex: 1;
   }
 
-  &-heading {
-    flex: 1;
-
-    .positions-item:not(.expanded) &:hover {
-      color: red;
-
-      .positions-title {
-        display: none;
-      }
-
-      .positions-detail {
-        display: block;
-      }
-    }
+  &-title {
+    cursor: pointer;
+    width: 100%;
   }
 
   &-detail {
-    display: none;
+    cursor: pointer;
+
+    > *:not(:last-child) {
+      margin-right: 0.4em;
+    }
   }
 
   &-preview {
-    &-text {
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+    @include font-size-medium;
 
-      // Remove margin and only display the first child, otherwise line-clamp
-      // wont work correctly.
-      p {
-        margin: 0;
-      }
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
-      *:not(:first-child) {
-        display: none;
-      }
+    // Remove margin and only display the first child, otherwise line-clamp
+    // wont work correctly.
+    p {
+      margin: 0;
+    }
+
+    *:not(:first-child) {
+      display: none;
     }
   }
 }

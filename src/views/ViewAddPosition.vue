@@ -6,19 +6,23 @@
     <textarea v-model="data.declaration" placeholder="Deklaration" />
     <textarea v-model="data.implementation" placeholder="Umsetzung" />
     <textarea v-model="data.references" placeholder="Referenzen" />
-    <a @click="publish">{{ content.publish }}</a>
+    <ButtonsBar>
+      <a slot="right" class="button" @click="publish">{{ content.publish }}</a>
+    </ButtonsBar>
   </div>
 </template>
 
 <script>
 import ViewMixins from '@/mixins/ViewMixin'
 import Message from '@/components/Message'
+import ButtonsBar from '@/components/ButtonsBar'
 
 export default {
   mixins: [ViewMixins],
 
   components: {
-    Message
+    Message,
+    ButtonsBar
   },
 
   data() {

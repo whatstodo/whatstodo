@@ -14,6 +14,13 @@
   display: flex;
   justify-content: space-between;
 
+  @include content-item;
+  @include font-size-small;
+
+  a {
+    @include button;
+  }
+
   a:not(:last-child) {
     margin-right: 0.5em;
   }

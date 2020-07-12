@@ -2,7 +2,9 @@
   <div class="positions">
     <div class="positions-add">
       <div class="positions-icon">+</div>
-      <router-link :to="{ name: 'Add' }">{{ content.addPosition }}</router-link>
+      <router-link class="button" :to="{ name: 'Add' }">{{
+        content.addPosition
+      }}</router-link>
     </div>
     <PositionsItem
       v-for="item of items"
@@ -49,3 +51,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.positions {
+  @include font-size-large;
+  &-add {
+    display: flex;
+    @include content-item;
+    .button {
+      @include font-size-large;
+      font-weight: inherit;
+    }
+  }
+}
+</style>

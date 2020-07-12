@@ -8,3 +8,76 @@
     border-bottom: $line-width solid;
   }
 }
+
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($path+".eot");
+    src: url($path+".eot?#iefix") format("embedded-opentype"),
+      url($path+".woff") format("woff"),
+      url($path+".ttf") format("truetype"),
+      url($path+".woff2") format("woff2");
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+// https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+@mixin font-size-vw($vw, $maxPx) {
+  font-size: $vw;
+  @media only screen and (
+    min-width: strip-unit($maxPx) / strip-unit($vw) * 100px
+  ) {
+    font-size: $maxPx;
+  }
+}
+
+@mixin font-size-small {
+  font-size: $font-size-small;
+}
+
+@mixin font-size-medium {
+  font-size: $font-size-medium;
+}
+
+@mixin font-size-large {
+  @include font-size-vw($font-size-large, $font-size-large-max);
+}
+
+@mixin media-small {
+  @media only screen and (min-width: 640px) {
+    @content;
+  }  
+}
+
+@mixin media-medium {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }  
+}
+
+@mixin media-large {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }  
+}
+
+@mixin media-extra-large {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }  
+}
+
+@mixin button {
+  @include font-size-small;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
