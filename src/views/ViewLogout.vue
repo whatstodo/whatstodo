@@ -1,21 +1,20 @@
 <template>
   <div class="view view-logout">
-    <div class="heading"></div>
-    <Message v-if="message" :text="message" />
+    <Heading :message="message" class="heading"></Heading>
     <ButtonsBar />
   </div>
 </template>
 
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
-import Message from '@/components/Message'
+import Heading from '@/components/Heading'
 import ButtonsBar from '@/components/ButtonsBar'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Message,
+    Heading,
     ButtonsBar
   },
 

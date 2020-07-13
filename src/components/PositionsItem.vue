@@ -1,13 +1,17 @@
 <template>
   <div class="positions-item" :class="{ expanded }">
-    <div class="positions-icon" @click="select()" :class="{ enabled: status }">
-      O
+    <div class="positions-icon" @click="select()">
+      <Icon
+        :name="icon"
+        @mouseenter="checkboxHovered = true"
+        @mouseleave="checkboxHovered = false"
+      />
     </div>
     <div class="positions-content">
       <div
         class="positions-bar"
-        @mouseenter="hovered = true"
-        @mouseleave="hovered = false"
+        @mouseenter="hover(true)"
+        @mouseleave="hover(false)"
       >
         <div
           class="positions-title"
@@ -16,16 +20,22 @@
         >
           {{ item.title }}
         </div>
-        <div
+        <PositionDetail
+          class="positions-detail"
+          v-show="expanded || hovered"
+          @click="toggleExpand"
+          :position="item"
+        />
+        <!-- <div
           class="positions-detail"
           v-show="expanded || hovered"
           @click="toggleExpand"
         >
-          <span>{{ signCount }}</span>
-          <span>{{ noteCount }}</span>
-          <span>{{ dateCreated }}</span>
-          <span>{{ dateModified }}</span>
-        </div>
+          <Icon name="checkmark">{{ signCount }}</Icon>
+          <Icon name="notes">{{ noteCount }}</Icon>
+          <Icon name="published">{{ dateCreated }}</Icon>
+          <Icon name="modified" v-if="dateModified">{{ dateModified }}</Icon>
+        </div> -->
       </div>
       <Markdown
         class="positions-preview"
@@ -38,12 +48,15 @@
 </template>
 
 <script>
-import { displayDate } from '@/utils'
 import Markdown from '@/components/Markdown'
+import Icon from '@/components/Icon'
+import PositionDetail from '@/components/PositionDetail'
 
 export default {
   components: {
-    Markdown
+    Markdown,
+    Icon,
+    PositionDetail
   },
 
   props: {
@@ -53,7 +66,8 @@ export default {
 
   data() {
     return {
-      hovered: false
+      hovered: false,
+      checkboxHovered: false
     }
   },
 
@@ -70,20 +84,12 @@ export default {
       return this.selected ?? this.signed
     },
 
-    noteCount() {
-      return this.item.notes?.length
-    },
-
-    signCount() {
-      return this.item.signedBy?.length
-    },
-
-    dateCreated() {
-      return displayDate(this.item.date)
-    },
-
-    dateModified() {
-      return displayDate(this.item.modified)
+    icon() {
+      return this.status
+        ? 'checkbox-active'
+        : this.checkboxHovered
+        ? 'checkbox-hover'
+        : 'checkbox'
     }
   },
 
@@ -94,6 +100,10 @@ export default {
       } else {
         this.$emit('expand')
       }
+    },
+
+    hover(value) {
+      this.hovered = value
     },
 
     select() {
@@ -113,22 +123,20 @@ export default {
     display: flex;
 
     @include content-item;
+    @include heading;
 
     &.expanded {
       .positions-detail {
         cursor: default;
-        @include font-size-medium;
+        @include font-size;
       }
     }
   }
 
   &-icon {
-    margin-right: 0.5em;
+    padding-right: $content-padding;
     cursor: pointer;
     user-select: none;
-    &.enabled {
-      color: red;
-    }
   }
 
   &-content {
@@ -137,19 +145,10 @@ export default {
 
   &-title {
     cursor: pointer;
-    width: 100%;
-  }
-
-  &-detail {
-    cursor: pointer;
-
-    > *:not(:last-child) {
-      margin-right: 0.4em;
-    }
   }
 
   &-preview {
-    @include font-size-medium;
+    @include font-size;
 
     display: -webkit-box;
     -webkit-line-clamp: 4;

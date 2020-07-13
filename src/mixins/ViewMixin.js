@@ -1,3 +1,5 @@
+import { mustache } from '@/utils'
+
 export default {
   proivde() {
     return {
@@ -23,7 +25,9 @@ export default {
     },
 
     message() {
-      return this.messages[this.messageId]
+      const { messageData } = this
+      const message = this.messages[this.messageId]
+      return message && (messageData ? mustache(message, messageData) : message)
     }
   },
 

@@ -1,7 +1,6 @@
 <template>
   <div class="view view-account">
-    <Message v-if="message" :text="message" />
-    <div class="heading">{{ content.heading }}</div>
+    <Heading :message="message">{{ content.heading }}</Heading>
     <div class="view-account-data">{{ user.name }}</div>
     <div class="view-account-data">{{ user.website }}</div>
     <div class="view-account-data">{{ user.email }}</div>
@@ -23,14 +22,14 @@
 
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
-import Message from '@/components/Message'
 import ButtonsBar from '@/components/ButtonsBar'
+import Heading from '@/components/Heading'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Message,
+    Heading,
     ButtonsBar
   },
 
@@ -51,3 +50,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.view-account {
+  &-data {
+    @include content-item;
+    @include heading;
+  }
+}
+</style>

@@ -17,7 +17,7 @@ export default {
 
   logout({ commit }) {
     commit('logout')
-    commit('collection/clear')
+    // commit('collection/clear')
     commit('users/setProp', { id: 'user', key: 'collection', value: {} })
   }
 }

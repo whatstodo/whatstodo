@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ invert }">
     <PageHeader v-if="!fullPage" />
     <RouterView class="view" />
     <PageFooter v-if="!fullPage" />
@@ -19,6 +19,10 @@ export default {
   computed: {
     fullPage() {
       return this.$route.meta.fullPage
+    },
+
+    invert() {
+      return this.$route.meta.invert
     }
   },
 
@@ -29,11 +33,16 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+  @include font-size;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   margin: 0;
+  color: $color;
 }
 
 h1,
@@ -43,6 +52,7 @@ h4,
 h5,
 h6 {
   font: inherit;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -59,14 +69,9 @@ a {
   @include button;
 }
 
-.heading {
-  padding: $content-padding;
-  @include font-size-large;
-}
-
 input,
 textarea {
-  @include font-size-medium;
+  @include font-size;
   font-family: G2TGR, 'Sans Serif';
 }
 
@@ -76,21 +81,37 @@ button {
 }
 
 @include font-face('G2TGR', './assets/fonts/TGR REGULAR/G2TGR-Regular', 400);
-
 @include font-face('G2TGR', './assets/fonts/TGR MEDIUM/G2TGR-Medium', 500);
-
-@include font-face('G2TGR', './assets/fonts/TGR BOLD/G2TGR-Bold', 700);
+@include font-face('G2TGR-Icons', './assets/fonts/TGR ICONS/G2TGR-Icons');
 
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100%;
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   font-family: G2TGR, 'Sans Serif';
-  @include font-size-medium;
 
   .view {
     flex: 1;
+
+    > .heading .heading-wrap {
+      font-weight: 500;
+    }
+  }
+
+  &.invert {
+    background: $color;
+
+    .page-header .buttons-bar {
+      background: linear-gradient($color 80%, transparent);
+    }
+
+    * {
+      color: white;
+    }
   }
 }
 </style>

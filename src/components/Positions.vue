@@ -1,13 +1,13 @@
 <template>
   <div class="positions">
     <div class="positions-add">
-      <div class="positions-icon">+</div>
+      <Icon class="positions-icon" name="add" />
       <router-link class="button" :to="{ name: 'Add' }">{{
         content.addPosition
       }}</router-link>
     </div>
     <PositionsItem
-      v-for="item of items"
+      v-for="item of sorted"
       :key="item.id"
       :item="item"
       :expanded="expandedItem === item"
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { sortByDate } from '@/utils'
+import Icon from '@/components/Icon'
 import PositionsItem from './PositionsItem'
 import ContentMixin from '@/mixins/ContentMixin'
 
@@ -27,6 +29,7 @@ export default {
   mixins: [ContentMixin],
 
   components: {
+    Icon,
     PositionsItem
   },
 
@@ -37,6 +40,12 @@ export default {
   data() {
     return {
       expandedItem: null
+    }
+  },
+
+  computed: {
+    sorted() {
+      return sortByDate(this.items)
     }
   },
 
@@ -54,10 +63,10 @@ export default {
 
 <style lang="scss">
 .positions {
-  @include font-size-large;
   &-add {
     display: flex;
     @include content-item;
+    @include heading;
     .button {
       @include font-size-large;
       font-weight: inherit;

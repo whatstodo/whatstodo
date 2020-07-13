@@ -1,4 +1,4 @@
-import { requireAll, slugify, escape } from '@/utils'
+import { requireAll, slugify, escape, formatDate } from '@/utils'
 import { setItem, setItems } from './mutations'
 
 const data = requireAll(
@@ -16,10 +16,15 @@ export const positions = {
   getters: {
     modified: (_state, _getters, _rootState, rootGetters) => id => {
       const users = rootGetters['users/haveSigned'](id)
-      const user = users.reduce((prev, current) =>
-        current.collection[id].date > prev.collection[id].date ? current : prev
+
+      return (
+        users.length &&
+        users.reduce((prev, current) =>
+          current.collection[id].date > prev.collection[id].date
+            ? current
+            : prev
+        )?.collection[id].date
       )
-      return user.collection[id].date
     },
 
     /**
@@ -64,6 +69,7 @@ export const positions = {
       for (const [key, value] of Object.entries(data)) {
         data[key] = escape(value)
       }
+      data.date = formatDate(new Date())
       commit('setItem', { ...data, id })
     }
   }

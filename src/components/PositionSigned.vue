@@ -1,13 +1,23 @@
 <template>
   <div class="position-signed">
-    <span v-for="userId of signedBy" :key="userId">{{
-      getUserName(userId)
-    }}</span>
+    <Icon
+      class="position-signee"
+      name="checkmark"
+      v-for="userId of signedBy"
+      :key="userId"
+      >{{ getUserName(userId) }}</Icon
+    >
   </div>
 </template>
 
 <script>
+import Icon from '@/components/Icon'
+
 export default {
+  components: {
+    Icon
+  },
+
   props: {
     positionId: String
   },
@@ -29,3 +39,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.position {
+  &-signed {
+    padding-top: $line-height * 0.8;
+    padding-bottom: $line-height * 0.85;
+    margin-bottom: $line-height * 0.85;
+    border-top: $line-width solid;
+    border-bottom: $line-width solid;
+  }
+
+  &-signee:not(:last-child) {
+    margin-right: 0.7em;
+  }
+}
+</style>

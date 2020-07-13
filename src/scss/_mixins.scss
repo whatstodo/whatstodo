@@ -4,9 +4,7 @@
   box-sizing: border-box;
   padding: $content-padding;
   width: 100%;
-  &:not(:last-child) {
-    border-bottom: $line-width solid;
-  }
+  border-bottom: $line-width solid;
 }
 
 @mixin font-face($font-name, $path, $weight: normal, $style: normal) {
@@ -39,16 +37,19 @@
   }
 }
 
-@mixin font-size-small {
-  font-size: $font-size-small;
+@mixin font-size {
+  @include font-size-vw($font-size, $font-size-max);
+  $line-height: 1.3em;
 }
 
-@mixin font-size-medium {
-  font-size: $font-size-medium;
+@mixin font-size-small {
+  font-size: $font-size-small;
+  $line-height: 1.3em;
 }
 
 @mixin font-size-large {
-  @include font-size-vw($font-size-large, $font-size-large-max);
+  font-size: $font-size-large;
+  $line-height: 1.3em;
 }
 
 @mixin media-small {
@@ -80,4 +81,10 @@
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+@mixin heading {
+  @include font-size-large;
+  padding: $heading-padding;
 }

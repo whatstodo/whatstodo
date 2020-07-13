@@ -17,12 +17,17 @@
   @include content-item;
   @include font-size-small;
 
+  padding-top: 1.3em;
+  padding-bottom: 1.3em;
+
+  border-bottom: none;
+
   a {
     @include button;
   }
 
   a:not(:last-child) {
-    margin-right: 0.5em;
+    margin-right: $content-padding;
   }
 }
 </style>

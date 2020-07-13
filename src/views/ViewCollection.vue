@@ -1,22 +1,36 @@
 <template>
   <div class="view view-collection">
-    <Message v-if="message" :text="message" />
+    <Heading :message="message">
+      <span>{{ content.heading }}</span>
+      <template slot="buttons">
+        <Icon name="share" />
+        <Icon name="print" />
+        <Icon name="close" />
+      </template>
+    </Heading>
     <Collection />
-    <a @click="checkout">{{ content.checkout }}</a>
+    <ButtonsBar
+      ><a slot="right" @click="checkout">{{ content.checkout }}</a></ButtonsBar
+    >
+    <div class="view-collection-invert" />
   </div>
 </template>
 
 <script>
+import Icon from '@/components/Icon'
 import ViewMixin from '@/mixins/ViewMixin'
-import Message from '@/components/Message'
 import Collection from '@/components/Collection'
+import Heading from '@/components/Heading'
+import ButtonsBar from '@/components/ButtonsBar'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Message,
-    Collection
+    Collection,
+    Heading,
+    ButtonsBar,
+    Icon
   },
 
   provide() {

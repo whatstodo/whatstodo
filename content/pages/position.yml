@@ -1,0 +1,3 @@
+messages:
+  share: |
+    Teile diese Position: [www.whatstodo.design/positionen/{{id}}](/#/position/{{id}}) oder den [whatstodo-Sticker](#/sticker.png).

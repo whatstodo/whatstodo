@@ -22,7 +22,7 @@ export default {
 <style lang="scss">
 .message {
   @include content-item;
-  @include font-size-medium;
+  @include font-size;
   padding-top: 0;
 
   p {

@@ -9,6 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'Positions',
+    meta: { saveScroll: true },
     component: ViewPositions
   },
   {
@@ -33,7 +34,7 @@ const routes = [
   {
     path: '/notizen',
     name: 'Collection',
-    meta: { auth: true, permissionHint: true },
+    meta: { auth: true, permissionHint: true, invert: true },
     component: () =>
       import(
         /* webpackChunkName: "view-collection" */ '@/views/ViewCollection.vue'
@@ -122,7 +123,12 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({ routes })
+const router = new VueRouter({
+  routes,
+
+  scrollBehavior: (to, _from, savedPosition) =>
+    to.meta.saveScroll ? savedPosition : { x: 0, y: 0 }
+})
 
 router.beforeEach(function(to, _from, next) {
   if (to.meta.auth && !store.state.isLoggedIn) {

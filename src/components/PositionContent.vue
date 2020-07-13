@@ -32,12 +32,13 @@ export default {
 <style lang="scss">
 .position-content {
   h1 {
-    font-weight: bold;
+    font-weight: 500;
     margin-top: $line-height;
+    margin-bottom: 0;
   }
 
-  ul {
-    margin-bottom: $line-height;
+  p {
+    margin: 0;
   }
 }
 </style>

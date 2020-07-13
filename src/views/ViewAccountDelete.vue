@@ -1,6 +1,6 @@
 <template>
   <div class="view view-delete-account">
-    <div class="heading">{{ content.heading }}</div>
+    <Heading>{{ content.heading }}</Heading>
     <Message v-if="message" :text="message" />
     <ButtonsBar>
       <template slot="right">
@@ -12,14 +12,14 @@
 
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
-import Message from '@/components/Message'
+import Heading from '@/components/Heading'
 import ButtonsBar from '@/components/ButtonsBar'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Message,
+    Heading,
     ButtonsBar
   },
 

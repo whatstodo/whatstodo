@@ -1,12 +1,11 @@
 <template>
-  <div class="sign-button" @click="$emit('click')">
+  <div class="sign-button" v-on="$listeners">
     <div ref="wrapper" />
   </div>
 </template>
 
 <script>
-import { random, animate } from '@/utils'
-import bus from '@/bus'
+import { animate } from '@/utils'
 import { interpolate } from 'polymorph-js'
 
 const context = require.context(
@@ -21,7 +20,25 @@ export default {
   data() {
     return {
       bubbles,
-      bubbleIndex: 0
+      duration: 230 // ms
+    }
+  },
+
+  computed: {
+    count() {
+      return this.$store.getters['positions/withStatus'].filter(
+        ({ signed, selected }) => selected ?? signed
+      ).length
+    },
+
+    bubbleIndex() {
+      return Math.min(this.count, this.bubbles.length - 1)
+    }
+  },
+
+  watch: {
+    bubbleIndex() {
+      this.nextBubble()
     }
   },
 
@@ -29,18 +46,11 @@ export default {
     const { wrapper } = this.$refs
     wrapper.innerHTML = this.bubbles[this.bubbleIndex]
     this.path = wrapper.querySelector('svg path')
-    bus.$on('select-position', () => this.nextBubble())
   },
 
   methods: {
     async nextBubble() {
       const prevPath = this.path
-
-      let newIndex
-      do {
-        newIndex = random(0, this.bubbles.length)
-      } while (newIndex === this.bubbleIndex)
-      this.bubbleIndex = newIndex
 
       const { wrapper } = this.$refs
       wrapper.innerHTML = this.bubbles[this.bubbleIndex]
@@ -52,7 +62,10 @@ export default {
         precision: 2
       })
 
-      animate(progress => path.setAttribute('d', interpolator(progress)), 400)
+      animate(
+        progress => path.setAttribute('d', interpolator(progress)),
+        this.duration
+      )
     }
   }
 }
@@ -62,7 +75,7 @@ export default {
 .sign-button {
   position: fixed;
   right: 0;
-  top: 20%;
+  bottom: 0;
 
   width: 300px;
 

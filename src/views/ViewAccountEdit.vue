@@ -1,21 +1,9 @@
 <template>
   <div class="view view-account-edit">
-    <div class="heading">{{ content.heading }}</div>
-    <input
-      :placeholder="user.name"
-      :value="user.name_draft"
-      @input="setDraft('name', $event.target.value)"
-    />
-    <input
-      :placeholder="user.website"
-      :value="user.website_draft"
-      @input="setDraft('website', $event.target.value)"
-    />
-    <input
-      :placeholder="user.email"
-      :value="user.email_draft"
-      @input="setDraft('email', $event.target.value)"
-    />
+    <Heading class="heading">{{ content.heading }}</Heading>
+    <input :value="name" @input="setDraft('name', $event.target.value)" />
+    <input :value="website" @input="setDraft('website', $event.target.value)" />
+    <input :value="email" @input="setDraft('email', $event.target.value)" />
     <ButtonsBar>
       <template slot="right">
         <a @click="save">{{ content.save_data }}</a>
@@ -27,12 +15,14 @@
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
 import ButtonsBar from '@/components/ButtonsBar'
+import Heading from '@/components/Heading'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    ButtonsBar
+    ButtonsBar,
+    Heading
   },
 
   data() {
@@ -44,6 +34,22 @@ export default {
   computed: {
     user() {
       return this.$store.getters['users/loggedIn'] || {}
+    },
+
+    draft() {
+      return this.user.draft || {}
+    },
+
+    name() {
+      return this.draft.name ?? this.user.name
+    },
+
+    website() {
+      return this.draft.website ?? this.user.website
+    },
+
+    email() {
+      return this.draft.email ?? this.user.email
     }
   },
 
@@ -74,6 +80,10 @@ export default {
     outline: none;
     border: none;
     @include content-item;
+
+    &:not(:focus) {
+      color: $color-grey;
+    }
   }
 }
 </style>

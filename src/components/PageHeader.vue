@@ -34,3 +34,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.page-header {
+  position: sticky;
+  top: 0;
+  .buttons-bar {
+    background: linear-gradient(white 80%, transparent);
+    margin-bottom: -1.3em;
+  }
+}
+</style>

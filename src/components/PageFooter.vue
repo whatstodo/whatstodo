@@ -23,3 +23,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.page-footer {
+  margin-top: 4rem;
+}
+</style>
