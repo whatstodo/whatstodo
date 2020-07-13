@@ -3,9 +3,9 @@
     <Heading :message="message">
       <span>{{ content.heading }}</span>
       <template slot="buttons">
-        <Icon name="share" />
-        <Icon name="print" />
-        <Icon name="close" />
+        <IconButton name="share" @click="share()" />
+        <IconButton name="print" />
+        <IconButton name="close" @click="close()" />
       </template>
     </Heading>
     <Collection />
@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon'
+import { slugify } from '@/utils'
+import IconButton from '@/components/IconButton'
 import ViewMixin from '@/mixins/ViewMixin'
 import Collection from '@/components/Collection'
 import Heading from '@/components/Heading'
@@ -30,7 +31,7 @@ export default {
     Collection,
     Heading,
     ButtonsBar,
-    Icon
+    IconButton
   },
 
   provide() {
@@ -48,6 +49,16 @@ export default {
   computed: {
     collection() {
       return this.$store.getters['collection/items']
+    },
+
+    user() {
+      return this.$store.getters['users/loggedIn']
+    },
+
+    messageData() {
+      return {
+        'user-id': slugify(this.user.name)
+      }
     }
   },
 
@@ -64,6 +75,14 @@ export default {
         name: 'Positions',
         params: { messageId: 'checkout_successful' }
       })
+    },
+
+    share() {
+      this.showMessage('share')
+    },
+
+    close() {
+      this.$router.push({ name: 'Positions' })
     }
   }
 }
