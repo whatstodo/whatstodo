@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import bus from '@/bus'
 import ViewMixin from '@/mixins/ViewMixin'
 import Message from '@/components/Message'
 import Positions from '@/components/Positions'
@@ -50,6 +51,7 @@ export default {
 
   methods: {
     selectPosition({ id, status }) {
+      bus.$emit('select-position')
       this.$store.commit('selection/setItem', { id, status })
     },
 

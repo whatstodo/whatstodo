@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "dompurify": "^2.0.12",
     "marked": "^1.1.0",
+    "polymorph-js": "^1.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -29,7 +30,9 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
+    "raw-loader": "^4.0.1",
     "sass-loader": "^8.0.2",
+    "svg-inline-loader": "^0.8.2",
     "vue-template-compiler": "^2.6.11",
     "yaml-loader": "^0.6.0"
   }
