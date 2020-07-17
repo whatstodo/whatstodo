@@ -5,7 +5,11 @@
       ><IconButton name="close" slot="buttons" @click="close()"
     /></Heading>
     <Message v-if="message" :text="message" />
-    <input v-model="data.title" placeholder="Titel" />
+    <input
+      v-model="data.title"
+      maxlength="40"
+      placeholder="Titel (max. 40 Zeichen)"
+    />
     <textarea v-model="data.declaration" placeholder="Deklaration" />
     <textarea v-model="data.implementation" placeholder="Umsetzung" />
     <textarea v-model="data.references" placeholder="Referenzen" />
