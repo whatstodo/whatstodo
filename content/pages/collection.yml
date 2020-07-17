@@ -4,7 +4,7 @@ messages:
   hint: |
     Hier siehst du die von dir unterzeichneten Positionen und kannst diese mit öffentlichen [Notizen ergänzen](#/howtodo). Mit einer Notiz hast du die Möglichkeit Ausnahmen zu einer Position zu definieren, individuelle Ziele zu kommunizieren und/oder Wissen zu teilen.
   share: |
-    Teile eine Übersicht deiner Positionen: [www.whatstodo.design/profil/{{user-id}}](/#/profil/{{user-id}}}) oder den [whatstodo-Sticker](#/sticker.png).
+    Teile eine Übersicht deiner Positionen: [www.whatstodo.design/profil/{{user-id}}](/#/profil/{{user-id}}) oder den [whatstodo-Sticker](#/sticker.png).
 add_note: Notiz hinzufügen
 
 checkout: Notizen veröffentlichen

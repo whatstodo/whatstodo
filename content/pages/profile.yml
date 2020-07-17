@@ -1,0 +1,6 @@
+heading: |
+  {{user-name}}'s Positionen:
+
+messages:
+  hint: |
+    Mehr Informationen über {{user-name}} findest du unter {{user-website-link}}.

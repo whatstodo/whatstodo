@@ -120,12 +120,14 @@ export default {
   svg {
     > path {
       fill: white;
+      cursor: pointer;
     }
     g[id$='text'] {
       display: none;
 
       path {
         fill: white;
+        cursor: pointer;
       }
     }
   }

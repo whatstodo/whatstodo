@@ -6,6 +6,8 @@ const data = requireAll(
   require.context('@/../content/users', false, /\.ya?ml$/)
 )
 
+const activeUser = 'studio-superfuture'
+
 export const users = {
   namespaced: true,
 
@@ -18,7 +20,7 @@ export const users = {
     ...getters,
 
     loggedIn(state) {
-      return state.byId['user']
+      return state.byId[activeUser]
     },
 
     haveSigned: (_state, getters) => positionId =>
@@ -49,12 +51,7 @@ export const users = {
     },
 
     save({ commit }) {
-      commit('applyDraft', 'user')
-    },
-
-    deleteAccount({ commit, dispatch }) {
-      commit('removeItem', 'user')
-      dispatch('logout', null, { root: true })
+      commit('applyDraft', activeUser)
     }
   }
 }

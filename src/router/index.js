@@ -32,6 +32,12 @@ const routes = [
       )
   },
   {
+    path: '/profil/:userId',
+    name: 'Profile',
+    component: () =>
+      import(/* webpackChunkName: "view-profile" */ '@/views/ViewProfile.vue')
+  },
+  {
     path: '/notizen',
     name: 'Collection',
     meta: { auth: true, permissionHint: true, invert: true, fullPage: true },
