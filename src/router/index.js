@@ -34,7 +34,7 @@ const routes = [
   {
     path: '/notizen',
     name: 'Collection',
-    meta: { auth: true, permissionHint: true, invert: true },
+    meta: { auth: true, permissionHint: true, invert: true, fullPage: true },
     component: () =>
       import(
         /* webpackChunkName: "view-collection" */ '@/views/ViewCollection.vue'
