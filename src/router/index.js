@@ -98,14 +98,16 @@ const routes = [
   {
     path: '/info',
     name: 'Info',
+    meta: { contentId: 'info' },
     component: () =>
-      import(/* webpackChunkName: "view-info" */ '@/views/ViewInfo.vue')
+      import(/* webpackChunkName: "view-page" */ '@/views/ViewPage.vue')
   },
   {
-    path: '/howto',
+    path: '/howtodo',
     name: 'Howto',
+    meta: { contentId: 'howtodo' },
     component: () =>
-      import(/* webpackChunkName: "view-howto" */ '@/views/ViewHowto.vue')
+      import(/* webpackChunkName: "view-page" */ '@/views/ViewPage.vue')
   },
   {
     path: '/teilnehmende',
@@ -118,14 +120,23 @@ const routes = [
   {
     path: '/kontakt',
     name: 'Contact',
+    meta: { contentId: 'contact' },
     component: () =>
-      import(/* webpackChunkName: "view-contact" */ '@/views/ViewContact.vue')
+      import(/* webpackChunkName: "view-page" */ '@/views/ViewPage.vue')
   },
   {
     path: '/impressum',
     name: 'Imprint',
+    meta: { contentId: 'imprint' },
     component: () =>
-      import(/* webpackChunkName: "view-imprint" */ '@/views/ViewImprint.vue')
+      import(/* webpackChunkName: "view-page" */ '@/views/ViewPage.vue')
+  },
+  {
+    path: '/datenschutz',
+    name: 'Privacy',
+    meta: { contentId: 'privacy' },
+    component: () =>
+      import(/* webpackChunkName: "view-page" */ '@/views/ViewPage.vue')
   }
 ]
 

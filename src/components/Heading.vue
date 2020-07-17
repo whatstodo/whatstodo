@@ -41,6 +41,6 @@ export default {
     }
   }
 
-  border-bottom: $line-width solid;
+  border-bottom: $line-width solid $color;
 }
 </style>

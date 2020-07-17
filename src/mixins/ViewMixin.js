@@ -1,7 +1,7 @@
 import { mustache } from '@/utils'
 
 export default {
-  proivde() {
+  provide() {
     return {
       contentId: this.contentId
     }
