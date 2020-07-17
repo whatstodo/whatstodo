@@ -6,15 +6,13 @@
     <div class="view-account-data">{{ user.email }}</div>
     <ButtonsBar>
       <template slot="left">
-        <RouterLink :to="{ name: 'Delete Account' }">{{
-          content.delete_profile
-        }}</RouterLink>
+        <a @click="showMessage('test_version')">{{ content.delete_profile }}</a>
         <RouterLink :to="{ name: 'Edit Account' }">{{
           content.change_data
         }}</RouterLink>
       </template>
       <template slot="right">
-        <RouterLink :to="{ name: 'Logout' }">{{ content.logout }}</RouterLink>
+        <a @click="showMessage('test_version')">{{ content.logout }}</a>
       </template>
     </ButtonsBar>
   </div>

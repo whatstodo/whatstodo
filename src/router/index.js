@@ -52,12 +52,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "view-login" */ '@/views/ViewLogin.vue')
   },
-  {
-    path: '/logout',
-    name: 'Logout',
-    component: () =>
-      import(/* webpackChunkName: "view-logout" */ '@/views/ViewLogout.vue')
-  },
+  // {
+  //   path: '/logout',
+  //   name: 'Logout',
+  //   component: () =>
+  //     import(/* webpackChunkName: "view-logout" */ '@/views/ViewLogout.vue')
+  // },
   {
     path: '/passwort',
     name: 'New Password',
@@ -80,15 +80,15 @@ const routes = [
         /* webpackChunkName: "view-account-edit" */ '@/views/ViewAccountEdit.vue'
       )
   },
-  {
-    path: '/account/loeschen',
-    name: 'Delete Account',
-    meta: { auth: true },
-    component: () =>
-      import(
-        /* webpackChunkName: "view-account-delete" */ '@/views/ViewAccountDelete.vue'
-      )
-  },
+  // {
+  //   path: '/account/loeschen',
+  //   name: 'Delete Account',
+  //   meta: { auth: true },
+  //   component: () =>
+  //     import(
+  //       /* webpackChunkName: "view-account-delete" */ '@/views/ViewAccountDelete.vue'
+  //     )
+  // },
   {
     path: '/info',
     name: 'Info',

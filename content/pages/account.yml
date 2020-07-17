@@ -3,6 +3,8 @@ heading: Deine Daten
 messages:
   change_data_successful: |
     Deine Daten wurden gespeichert. Eine Bestätigung wurde an deine E-Mail-Adresse gesendet.
+  test_version: |
+    Diese Funktion ist in der Testversion nicht vorhanden.
 
 change_data: Daten ändern
 

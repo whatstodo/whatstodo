@@ -80,6 +80,7 @@ export default {
     outline: none;
     border: none;
     @include content-item;
+    @include heading;
 
     &:not(:focus) {
       color: $color-grey;
