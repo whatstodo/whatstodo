@@ -1,5 +1,9 @@
 <template>
-  <div class="sign-button" v-on="$listeners">
+  <div
+    class="sign-button"
+    :class="{ 'bubble-hovered': bubbleHovered }"
+    v-on="$listeners"
+  >
     <div ref="wrapper" />
   </div>
 </template>
@@ -20,7 +24,8 @@ export default {
   data() {
     return {
       bubbles,
-      duration: 230 // ms
+      duration: 230, // ms
+      bubbleHovered: false
     }
   },
 
@@ -42,19 +47,30 @@ export default {
     }
   },
 
+  created() {
+    this.listeners = {
+      bubbleEnter: () => this.handleBubbleEnter(),
+      bubbleLeave: event => this.handleBubbleLeave(event)
+    }
+  },
+
   mounted() {
     const { wrapper } = this.$refs
     wrapper.innerHTML = this.bubbles[this.bubbleIndex]
-    this.path = wrapper.querySelector('svg path')
+    this.path = wrapper.querySelector('svg > path')
+    this.addBubbleListeners(this.path)
   },
 
   methods: {
     async nextBubble() {
       const prevPath = this.path
+      this.removeBubbleListeners(prevPath)
 
       const { wrapper } = this.$refs
       wrapper.innerHTML = this.bubbles[this.bubbleIndex]
-      const path = (this.path = wrapper.querySelector('svg path'))
+
+      const path = (this.path = wrapper.querySelector('svg > path'))
+      this.addBubbleListeners(path)
 
       const interpolator = interpolate([prevPath, path], {
         origin: { x: '50%', y: '50%' },
@@ -66,6 +82,28 @@ export default {
         progress => path.setAttribute('d', interpolator(progress)),
         this.duration
       )
+    },
+
+    addBubbleListeners(bubblePath) {
+      bubblePath.addEventListener('mouseenter', this.listeners.bubbleEnter)
+      bubblePath.addEventListener('mouseleave', this.listeners.bubbleLeave)
+    },
+
+    removeBubbleListeners(bubblePath) {
+      bubblePath.removeEventListener('mouseenter', this.listeners.bubbleEnter)
+      bubblePath.removeEventListener('mouseleave', this.listeners.bubbleLeave)
+    },
+
+    handleBubbleEnter() {
+      this.bubbleHovered = true
+    },
+
+    handleBubbleLeave(event) {
+      var el = event.toElement || event.relatedTarget
+      // Prevent text (path) elements from triggering mouseleave.
+      if (el.tagName !== 'path') {
+        this.bubbleHovered = false
+      }
     }
   }
 }
@@ -80,27 +118,25 @@ export default {
   width: 300px;
 
   svg {
-    path {
+    > path {
       fill: white;
     }
-
     g[id$='text'] {
       display: none;
+
       path {
         fill: white;
       }
     }
   }
 
-  &:hover {
-    svg {
-      path {
-        fill: $color;
-      }
+  &.bubble-hovered {
+    svg > path {
+      fill: $color;
+    }
 
-      g[id$='text'] {
-        display: block;
-      }
+    g[id$='text'] {
+      display: block;
     }
   }
 }
