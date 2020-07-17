@@ -84,10 +84,11 @@ export default {
       fill: white;
     }
 
-    text {
+    g[id$='text'] {
       display: none;
-      color: $color;
-      font-family: G2TGR;
+      path {
+        fill: white;
+      }
     }
   }
 
@@ -97,7 +98,7 @@ export default {
         fill: $color;
       }
 
-      text {
+      g[id$='text'] {
         display: block;
       }
     }
