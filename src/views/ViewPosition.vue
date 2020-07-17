@@ -7,7 +7,7 @@
       <Message v-if="message" :text="message" />
     </PositionDetail>
     <main class="view-position-content">
-      <PositonContent :positionId="id" />
+      <PositionContent :positionId="id" />
       <PositionSigned v-if="position.signedBy.length" :positionId="id" />
       <PositionNotes v-if="position.notes.length" :positionId="id" />
     </main>
@@ -17,7 +17,7 @@
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
 import PositionDetail from '@/components/PositionDetail'
-import PositonContent from '@/components/PositionContent'
+import PositionContent from '@/components/PositionContent'
 import PositionSigned from '@/components/PositionSigned'
 import PositionNotes from '@/components/PositionNotes'
 import Icon from '@/components/Icon'
@@ -29,7 +29,7 @@ export default {
   components: {
     Icon,
     PositionDetail,
-    PositonContent,
+    PositionContent,
     PositionSigned,
     PositionNotes,
     Message
