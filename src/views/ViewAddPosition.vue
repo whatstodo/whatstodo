@@ -54,7 +54,6 @@ export default {
     },
 
     close() {
-      console.log('close')
       this.$router.push({ name: 'Positions' })
     }
   }

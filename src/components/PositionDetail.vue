@@ -46,8 +46,6 @@ export default {
 
 <style lang="scss">
 .position-detail {
-  cursor: pointer;
-
   > *:not(:last-child) {
     margin-right: 0.8em;
   }

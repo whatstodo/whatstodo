@@ -1,9 +1,10 @@
 <template>
   <div class="view view-position">
     <div class="heading">{{ position.title }}</div>
+    <IconButton class="view-position-close" name="close" @click="close" />
     <PositionDetail class="view-position-detail" :position="position">
-      <Icon name="share" @click="share" />
-      <Icon name="print" />
+      <IconButton name="share" @click="share" />
+      <IconButton name="print" />
       <Message v-if="message" :text="message" />
     </PositionDetail>
     <main class="view-position-content">
@@ -20,14 +21,14 @@ import PositionDetail from '@/components/PositionDetail'
 import PositionContent from '@/components/PositionContent'
 import PositionSigned from '@/components/PositionSigned'
 import PositionNotes from '@/components/PositionNotes'
-import Icon from '@/components/Icon'
+import IconButton from '@/components/IconButton'
 import Message from '@/components/Message'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Icon,
+    IconButton,
     PositionDetail,
     PositionContent,
     PositionSigned,
@@ -65,6 +66,14 @@ export default {
   methods: {
     share() {
       this.showMessage('share')
+    },
+
+    close() {
+      if (window.history.length > 1) {
+        this.$router.go(-1)
+      } else {
+        this.$router.push({ name: 'Positions' })
+      }
     }
   }
 }
@@ -75,6 +84,15 @@ export default {
   width: 66.66%;
   margin: 0 auto;
   margin-bottom: $large-line-height;
+
+  &-close {
+    @include font-size-large;
+    padding-right: $content-padding;
+    padding-top: $content-padding * 0.5;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   .message {
     border: none;
