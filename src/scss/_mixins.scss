@@ -28,17 +28,23 @@
   @return $number;
 }
 
-@mixin font-size-vw($vw, $maxPx) {
+@mixin font-size-vw($vw, $minPx, $maxPx) {
   font-size: $vw;
   @media only screen and (
     min-width: strip-unit($maxPx) / strip-unit($vw) * 100px
   ) {
     font-size: $maxPx;
   }
+
+  @media only screen and (
+    max-width: strip-unit($minPx) / strip-unit($vw) * 100px
+  ) {
+    font-size: $minPx;
+  }
 }
 
 @mixin font-size {
-  @include font-size-vw($font-size, $font-size-max);
+  @include font-size-vw($font-size, $font-size-min, $font-size-max);
   $line-height: 1.3em;
 }
 
