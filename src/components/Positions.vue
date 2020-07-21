@@ -10,7 +10,7 @@
       v-for="item of sorted"
       :key="item.id"
       :item="item"
-      :expanded="expandedItem === item"
+      :expanded="expandedItem && expandedItem.id === item.id"
       @select="select(item, $event)"
       @open="open(item)"
       @expand="expandedItem = item"

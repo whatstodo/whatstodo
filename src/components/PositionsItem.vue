@@ -13,36 +13,20 @@
         @mouseenter="hover(true)"
         @mouseleave="hover(false)"
       >
-        <div
-          class="positions-title"
-          v-show="expanded || !hovered"
-          @click="toggleExpand"
-        >
+        <div class="positions-title" v-show="expanded || !hovered">
           {{ item.title }}
         </div>
         <PositionDetail
           class="positions-detail"
           v-show="expanded || hovered"
-          @click="toggleExpand"
+          @click="expand"
           :position="item"
         />
-        <!-- <div
-          class="positions-detail"
-          v-show="expanded || hovered"
-          @click="toggleExpand"
-        >
-          <Icon name="checkmark">{{ signCount }}</Icon>
-          <Icon name="notes">{{ noteCount }}</Icon>
-          <Icon name="published">{{ dateCreated }}</Icon>
-          <Icon name="modified" v-if="dateModified">{{ dateModified }}</Icon>
-        </div> -->
       </div>
-      <Markdown
-        class="positions-preview"
-        v-if="expanded"
-        :text="item.declaration"
-        @click="open"
-      />
+      <div class="positions-preview" v-if="expanded" @click="open">
+        <Markdown class="positions-preview-text" :text="item.declaration" />
+        <span class="positions-preview-more">→ weiter lesen</span>
+      </div>
     </div>
   </div>
 </template>
@@ -96,10 +80,18 @@ export default {
   methods: {
     toggleExpand() {
       if (this.expanded) {
-        this.$emit('collapse')
+        this.collapse()
       } else {
-        this.$emit('expand')
+        this.expand()
       }
+    },
+
+    expand() {
+      this.$emit('expand')
+    },
+
+    collapse() {
+      this.$emit('collapse')
     },
 
     hover(value) {
@@ -129,6 +121,7 @@ export default {
       .positions-detail {
         cursor: default;
         @include font-size;
+        margin: 1em 0;
       }
     }
   }
@@ -144,25 +137,32 @@ export default {
   }
 
   &-title {
+    cursor: default;
+  }
+
+  &-detail {
     cursor: pointer;
   }
 
   &-preview {
     @include font-size;
+    cursor: pointer;
 
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    &-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
 
-    // Remove margin and only display the first child, otherwise line-clamp
-    // wont work correctly.
-    p {
-      margin: 0;
-    }
+      // Remove margin and only display the first child, otherwise line-clamp
+      // wont work correctly.
+      p {
+        margin: 0;
+      }
 
-    *:not(:first-child) {
-      display: none;
+      *:not(:first-child) {
+        display: none;
+      }
     }
   }
 }
