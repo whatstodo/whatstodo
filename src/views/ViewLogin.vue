@@ -1,58 +1,25 @@
 <template>
   <div class="view view-login">
-    <div class="heading">{{ content.heading }}</div>
-    <Message v-if="message" :text="message" />
-    <input placeholder="Email" />
-    <input placeholder="Passwort" />
-    <ButtonsBar>
-      <template slot="left">
-        <RouterLink :to="{ name: 'Delete Account' }">{{
-          content.new_account
-        }}</RouterLink>
-        <RouterLink :to="{ name: 'New Password' }">{{
-          content.new_password
-        }}</RouterLink>
-      </template>
-      <template slot="right">
-        <RouterLink :to="{ name: 'Positions' }">{{ content.login }}</RouterLink>
-      </template>
-    </ButtonsBar>
+    <Heading :message="message">{{ content.heading }}</Heading>
   </div>
 </template>
 
 <script>
 import ViewMixin from '@/mixins/ViewMixin'
-import Message from '@/components/Message'
-import ButtonsBar from '@/components/ButtonsBar'
+import Heading from '@/components/Heading'
 
 export default {
   mixins: [ViewMixin],
 
   components: {
-    Message,
-    ButtonsBar
+    Heading
   },
 
   data() {
     return {
-      contentId: 'login'
-    }
-  },
-
-  mounted() {
-    if (this.$route.meta.permissionHint) {
-      this.showMessage('login_required')
+      contentId: 'login',
+      messageId: 'test_version'
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.view-login {
-  input {
-    outline: 0;
-    border: 0;
-    @include content-item;
-  }
-}
-</style>

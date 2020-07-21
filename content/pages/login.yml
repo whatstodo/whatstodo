@@ -1,13 +1,5 @@
 heading: Login
 
 messages:
-  login_required: |
-    Um eine Position [hinzuzufügen](#/howtodo)  oder [Positionen zu unterzeichnen](#/howtodo), musst du dich anmelden.
-  new_password: |
-    Ein Link zum Zurücksetzen deines Passworts wurde an deine E-Mail-Adresse gesendet.
-
-login: Anmelden
-
-new_account: Registrieren
-
-new_password: Passwort vergessen
+    test_version: |
+      Diese Funktion ist in der Testversion nicht vorhanden.
