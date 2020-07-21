@@ -58,10 +58,14 @@ export default {
     },
 
     async sign() {
-      this.$router.push({
-        name: 'Collection',
-        params: { sign: true }
-      })
+      if (this.$store.getters['selection/isEmpty']) {
+        this.showMessage('select_position')
+      } else {
+        this.$router.push({
+          name: 'Collection',
+          params: { sign: true }
+        })
+      }
     }
   }
 }

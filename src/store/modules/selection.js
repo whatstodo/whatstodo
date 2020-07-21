@@ -11,7 +11,8 @@ export const selection = {
 
   getters: {
     item,
-    items
+    items,
+    isEmpty: ({ allIds }) => !allIds.length
   },
 
   mutations: {

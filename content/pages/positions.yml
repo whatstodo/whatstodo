@@ -5,5 +5,7 @@ messages:
     Deine Position wurde eingereicht. Nach kurzer Prüfung wird die Position veröffentlicht und du erhältst eine Bestätigung per Email. (In der Testversion wird dir die Postion direkt angezeigt.)
   checkout_successful: |
     Deine Notizen wurden veröffentlicht.
+  select_position: |
+    Wähle zunächst eine oder mehrere Positionen aus um diese zu [unterzeichnen](#/howtodo)
 
 addPosition: Position hinzufügen
