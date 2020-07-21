@@ -64,12 +64,22 @@ export const positions = {
       commit('setItems', data)
     },
 
-    add({ commit }, data) {
+    add({ commit, rootState, state }, data) {
       for (const [key, value] of Object.entries(data)) {
         data[key] = escape(value)
       }
       data.date = formatDate(new Date())
       commit('setItem', data)
+      commit(
+        'collection/setItem',
+        { id: data.id, note: null, draft: null },
+        { root: true }
+      )
+      commit(
+        'users/setProp',
+        { id: rootState.userId, key: 'collection', value: state.byId },
+        { root: true }
+      )
     }
   }
 }
