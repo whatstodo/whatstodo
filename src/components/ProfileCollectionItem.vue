@@ -5,7 +5,7 @@
       <div class="collection-title">{{ position.title }}</div>
       <div class="collection-note" v-if="note">
         <Icon name="note" />
-        <div>{{ note }}</div>
+        <Markdown :text="note" />
       </div>
     </div>
   </div>
@@ -14,12 +14,14 @@
 <script>
 import Icon from '@/components/Icon'
 import ContentMixin from '@/mixins/ContentMixin'
+import Markdown from '@/components/Markdown'
 
 export default {
   mixins: [ContentMixin],
 
   components: {
-    Icon
+    Icon,
+    Markdown
   },
 
   props: {
@@ -61,6 +63,10 @@ export default {
     @include font-size;
 
     display: flex;
+
+    p {
+      margin: 0;
+    }
 
     .icon {
       margin-right: 0.3em;
