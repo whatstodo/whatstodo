@@ -137,6 +137,15 @@ const routes = [
     meta: { contentId: 'privacy' },
     component: () =>
       import(/* webpackChunkName: "view-page" */ '@/views/ViewPage.vue')
+  },
+  {
+    path: '/404',
+    component: () =>
+      import(/* webpackChunkName: "not-found" */ '@/views/ViewNotFound.vue')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 
