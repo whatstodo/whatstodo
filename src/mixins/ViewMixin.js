@@ -44,6 +44,7 @@ export default {
   methods: {
     showMessage(id) {
       this.messageId = id
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 }
