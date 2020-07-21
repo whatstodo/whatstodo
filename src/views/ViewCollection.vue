@@ -4,7 +4,7 @@
       <span>{{ content.heading }}</span>
       <template slot="buttons">
         <IconButton name="share" @click="share()" />
-        <IconButton name="print" />
+        <IconButton name="print" @click="print()" />
         <IconButton name="close" @click="close()" />
       </template>
     </Heading>
@@ -75,6 +75,10 @@ export default {
         name: 'Positions',
         params: { messageId: 'checkout_successful' }
       })
+    },
+
+    print() {
+      window.print()
     },
 
     share() {

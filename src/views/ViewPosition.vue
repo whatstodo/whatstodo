@@ -4,7 +4,7 @@
     <IconButton class="view-position-close" name="close" @click="close" />
     <PositionDetail class="view-position-detail" :position="position">
       <IconButton name="share" @click="share" />
-      <IconButton name="print" />
+      <IconButton name="print" @click="print" style="margin-right: 0" />
       <Message v-if="message" :text="message" />
     </PositionDetail>
     <main class="view-position-content">
@@ -66,6 +66,10 @@ export default {
   methods: {
     share() {
       this.showMessage('share')
+    },
+
+    print() {
+      window.print()
     },
 
     close() {
