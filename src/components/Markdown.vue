@@ -1,5 +1,5 @@
 <template>
-  <component :is="'div'" v-html="html" v-on="$listeners" />
+  <component class="markdown" :is="'div'" v-html="html" v-on="$listeners" />
 </template>
 
 <script>
@@ -18,3 +18,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.markdown {
+  word-break: break-word;
+}
+</style>
