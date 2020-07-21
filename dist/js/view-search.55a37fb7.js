@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["view-search"],{d1d6:function(e,n,s){"use strict";s.r(n);var t=function(){var e=this,n=e.$createElement,s=e._self._c||n;return s("div",{staticClass:"view view-search"})},a=[],c=s("2877"),i={},l=Object(c["a"])(i,t,a,!1,null,null,null);n["default"]=l.exports}}]);
-//# sourceMappingURL=view-search.55a37fb7.js.map
