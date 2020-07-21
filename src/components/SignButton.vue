@@ -114,12 +114,15 @@ export default {
   position: fixed;
   right: 0;
   bottom: 0;
-
   width: 300px;
+  // Remove pointer events, so the bounding box of the bubble doesn't block
+  // the underlying elements. Only the bubble path will have pointer events.
+  pointer-events: none;
 
   svg {
     > path {
       fill: white;
+      pointer-events: all;
       cursor: pointer;
     }
     g[id$='text'] {
