@@ -58,7 +58,10 @@ export default {
     },
 
     async sign() {
-      if (this.$store.getters['selection/isEmpty']) {
+      if (
+        this.$store.getters['collection/isEmpty'] &&
+        this.$store.getters['selection/isEmpty']
+      ) {
         this.showMessage('select_position')
       } else {
         this.$router.push({
