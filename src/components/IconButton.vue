@@ -18,6 +18,6 @@ export default {
 
 <style lang="scss">
 .icon-button {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 </style>

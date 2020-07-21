@@ -43,6 +43,8 @@ export default {
 
 <style lang="scss" scoped>
 .icon {
+  cursor: default;
+
   &-character {
     font-family: G2TGR-Icons;
   }
