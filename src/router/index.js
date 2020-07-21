@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/position/:id',
     name: 'Position',
-    meta: { fullPage: true },
+    meta: { fullPage: true, saveScroll: true },
     props: true,
     component: () =>
       import(
@@ -112,6 +112,7 @@ const routes = [
   {
     path: '/teilnehmende',
     name: 'Participants',
+    meta: { saveScroll: true },
     component: () =>
       import(
         /* webpackChunkName: "view-participants" */ '@/views/ViewParticipants.vue'
@@ -152,8 +153,16 @@ const routes = [
 const router = new VueRouter({
   routes,
 
-  scrollBehavior: (to, _from, savedPosition) =>
-    to.meta.saveScroll ? savedPosition : { x: 0, y: 0 }
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+
+  // scrollBehavior: (to, _from, savedPosition) =>
+  //   to.meta.saveScroll ? savedPosition : { x: 0, y: 0 }
 })
 
 router.beforeEach(function(to, _from, next) {

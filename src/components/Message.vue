@@ -45,6 +45,6 @@ export default {
 
 .fade-enter-to {
   opacity: 1;
-  transition: opacity 1s;
+  transition: opacity 0.6s;
 }
 </style>

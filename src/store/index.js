@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLoggedIn: true,
-    userId: 'studio-superfuture'
+    userId: 'user'
   },
   mutations,
   actions,
