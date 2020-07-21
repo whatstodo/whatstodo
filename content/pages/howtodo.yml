@@ -16,7 +16,7 @@ text:   |
   ---
 
   # Position hinzufügen
-  Um eine neue Position zu veröffentlichen, nutze [+ Position hinzufügen](#/add-position) zu Beginn der *whatstodo*-Liste. Hier gelangst du zu einem Formular, in dem du deine Position schreiben und veröffentlichen kannst.
+  Um eine neue Position zu veröffentlichen, nutze [+ Position hinzufügen](#/neu) zu Beginn der *whatstodo*-Liste. Hier gelangst du zu einem Formular, in dem du deine Position schreiben und veröffentlichen kannst.
 
   Eine Position besteht aus vier Teilen: 
   1. Titel (max. 50 Zeichen)
@@ -36,13 +36,13 @@ text:   |
   ---
 
   # An- & Abmelden
-  Unter [Login](#/login) kannst du dich mit deiner E-Mail-Adresse und deinem Passwort anmelden. Falls du dein Passwort vergessen hast, findest du hier ebenfalls einen entsprechenden Link. Bist du bereits angemeldet, erscheint dein Name oben rechts auf der Webseite. Hier gelangst du zu der Übersicht [Deine Daten](#/userdata).
+  Unter [Login](#/login) kannst du dich mit deiner E-Mail-Adresse und deinem Passwort anmelden. Falls du dein Passwort vergessen hast, findest du hier ebenfalls einen entsprechenden Link. Bist du bereits angemeldet, erscheint dein Name oben rechts auf der Webseite. Hier gelangst du zu der Übersicht [Deine Daten](#/account).
 
   ---
 
   # Registrieren & Konto löschen
   Hast du noch kein Konto und möchtest dich bei *whatstodo* registrieren, findest du einen entsprechenden Link unter [Login](#/login).
-  Möchtest du dein Konto löschen, findest du – sobald du dich angemeldet hast – unter dem Menüpunkt [Deine Daten](#/userdata) einen entsprechenden Link. Löschst du dein Konto, werden deine Unterzeichnungen und Notizen entfernt. Des Weiteren werden alle deine auf unseren Servern hinterlegten persönlichen Daten gelöscht.
+  Möchtest du dein Konto löschen, findest du – sobald du dich angemeldet hast – unter dem Menüpunkt [Deine Daten](#/account) einen entsprechenden Link. Löschst du dein Konto, werden deine Unterzeichnungen und Notizen entfernt. Des Weiteren werden alle deine auf unseren Servern hinterlegten persönlichen Daten gelöscht.
 
   ---
 
