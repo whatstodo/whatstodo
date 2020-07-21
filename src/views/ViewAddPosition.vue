@@ -4,7 +4,6 @@
       ><span>{{ content.heading }}</span
       ><IconButton name="close" slot="buttons" @click="close()"
     /></Heading>
-    <Message v-if="message" :text="message" />
     <input
       v-model="data.title"
       maxlength="40"
@@ -49,12 +48,20 @@ export default {
   },
 
   methods: {
+    validate() {
+      return Object.values(this.data).every(value => value.trim() !== '')
+    },
+
     publish() {
-      this.$store.dispatch('positions/add', this.data)
-      this.$router.push({
-        name: 'Positions',
-        params: { messageId: 'position_successful' }
-      })
+      if (this.validate()) {
+        this.$store.dispatch('positions/add', this.data)
+        this.$router.push({
+          name: 'Positions',
+          params: { messageId: 'position_successful' }
+        })
+      } else {
+        this.showMessage('missing_fields')
+      }
     },
 
     close() {

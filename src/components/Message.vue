@@ -1,5 +1,9 @@
 <template>
-  <Markdown class="message" :text="text" />
+  <div class="message">
+    <transition name="fade" mode="out-in" :appear="appear">
+      <Markdown class="message-content" :text="text" :key="text" />
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -15,6 +19,12 @@ export default {
       type: String,
       required: true
     }
+  },
+
+  computed: {
+    appear() {
+      return this.$route.params.messageId !== undefined
+    }
   }
 }
 </script>
@@ -28,5 +38,14 @@ export default {
   p {
     margin: 0;
   }
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-to {
+  opacity: 1;
+  transition: opacity 1s;
 }
 </style>

@@ -3,5 +3,7 @@ heading: Position hinzufügen
 messages:
   hint: |
     Verfasse eine neue Position! Mit der Veröffentlichung unterzeichnest du diese automatisch, erklärst du dich mit dem [Selbstverständnis](#/info) von whatstodo einverstanden und bestätigst, dass du unser [Howtodo](#/howtodo) beachtest.
+  missing_fields: |
+    Um eine Position hinzuzufügen musst du alle Textfelder ausfüllen.
 
 publish: Veröffentlichen

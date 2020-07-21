@@ -1,6 +1,6 @@
 <template>
   <div class="view view-positions">
-    <Message v-if="message" :text="message" />
+    <Message :text="message" v-if="message" />
     <Positions
       :items="positions"
       @select="selectPosition"

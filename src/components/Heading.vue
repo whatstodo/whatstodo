@@ -4,7 +4,7 @@
       <slot />
       <div class="heading-buttons"><slot name="buttons" /></div>
     </div>
-    <Message v-if="message" :text="message" />
+    <Message :text="message" />
   </div>
 </template>
 
