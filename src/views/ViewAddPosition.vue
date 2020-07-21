@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { slugify } from '@/utils'
 import ViewMixins from '@/mixins/ViewMixin'
 import Heading from '@/components/Heading'
 import ButtonsBar from '@/components/ButtonsBar'
@@ -52,16 +53,27 @@ export default {
       return Object.values(this.data).every(value => value.trim() !== '')
     },
 
+    checkId(id) {
+      return !this.$store.state.positions.byId[id]
+    },
+
     publish() {
-      if (this.validate()) {
-        this.$store.dispatch('positions/add', this.data)
-        this.$router.push({
-          name: 'Positions',
-          params: { messageId: 'position_successful' }
-        })
-      } else {
+      if (!this.validate()) {
         this.showMessage('missing_fields')
+        return
       }
+
+      const id = slugify(this.data.title)
+      if (!this.checkId(id)) {
+        this.showMessage('name_already_taken')
+        return
+      }
+
+      this.$store.dispatch('positions/add', { ...this.data, id })
+      this.$router.push({
+        name: 'Positions',
+        params: { messageId: 'position_successful' }
+      })
     },
 
     close() {
