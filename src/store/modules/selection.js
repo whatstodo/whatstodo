@@ -1,4 +1,4 @@
-import { item, items } from './getters'
+import * as getters from './getters'
 import { setItem, clear } from './mutations'
 
 export const selection = {
@@ -10,9 +10,7 @@ export const selection = {
   }),
 
   getters: {
-    item,
-    items,
-    isEmpty: ({ allIds }) => !allIds.length
+    ...getters
   },
 
   mutations: {

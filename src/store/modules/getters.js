@@ -18,3 +18,5 @@ export const includes = ({ byId }) => id => !!byId[id]
  */
 export const modified = ({ byId }) => id =>
   byId[id] && !!Object.keys(byId[id].draft || {}).length
+
+export const isEmpty = ({ allIds }) => !allIds.length
