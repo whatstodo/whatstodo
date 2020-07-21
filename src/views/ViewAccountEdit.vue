@@ -59,7 +59,8 @@ export default {
 
   methods: {
     setDraft(key, value) {
-      this.$store.commit('users/setDraft', { id: 'user', key, value })
+      const id = this.$store.state.userId
+      this.$store.commit('users/setDraft', { id, key, value })
     },
 
     async save() {

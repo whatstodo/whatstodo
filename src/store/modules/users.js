@@ -6,8 +6,6 @@ const data = requireAll(
   require.context('@/../content/users', false, /\.ya?ml$/)
 )
 
-const activeUser = 'studio-superfuture'
-
 export const users = {
   namespaced: true,
 
@@ -19,8 +17,8 @@ export const users = {
   getters: {
     ...getters,
 
-    loggedIn(state) {
-      return state.byId[activeUser]
+    loggedIn(state, _getters, rootState) {
+      return state.byId[rootState.userId]
     },
 
     haveSigned: (_state, getters) => positionId =>
@@ -50,8 +48,8 @@ export const users = {
       commit('setItems', data)
     },
 
-    save({ commit }) {
-      commit('applyDraft', activeUser)
+    save({ commit, rootState }) {
+      commit('applyDraft', rootState.userId)
     }
   }
 }
