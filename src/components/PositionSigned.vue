@@ -5,7 +5,9 @@
       name="checkmark"
       v-for="userId of signedBy"
       :key="userId"
-      >{{ getUserName(userId) }}</Icon
+      ><RouterLink :to="{ name: 'Profile', params: { userId } }">{{
+        getUserName(userId)
+      }}</RouterLink></Icon
     >
   </div>
 </template>
@@ -48,6 +50,12 @@ export default {
     margin-bottom: $line-height * 0.85;
     border-top: $line-width solid;
     border-bottom: $line-width solid;
+  }
+
+  &-signee {
+    a {
+      text-decoration: none;
+    }
   }
 
   &-signee:not(:last-child) {
