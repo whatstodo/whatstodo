@@ -64,7 +64,7 @@ export default {
       border: 0;
       border-top: $line-width solid;
       margin-left: -$content-padding;
-      width: 100vw;
+      width: calc(100% + 2 * #{$content-padding});
       margin-bottom: 1em;
       color: inherit;
     }
