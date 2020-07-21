@@ -98,7 +98,7 @@ export default {
     resize: none;
 
     &:focus {
-      height: 50vh;
+      height: 30vh;
     }
   }
 }
