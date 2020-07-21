@@ -11,7 +11,7 @@ renderer.link = function(...args) {
   const href = args[0]
   const link = marked.Renderer.prototype.link.apply(this, args)
   return href.indexOf('http://') === 0 || href.indexOf('https://') === 0
-    ? link.replace('<a', '<a target="blank"')
+    ? link.replace('<a', '<a target="blank" rel="noopener"')
     : link
 }
 
