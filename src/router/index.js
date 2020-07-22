@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ViewPositions from '@/views/ViewPositions'
-import store from '@/store'
+// import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -153,24 +153,25 @@ const routes = [
 const router = new VueRouter({
   routes,
 
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 0, y: 0 }
-    }
-  }
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   } else {
+  //     return { x: 0, y: 0 }
+  //   }
+  // }
 
-  // scrollBehavior: (to, _from, savedPosition) =>
-  //   to.meta.saveScroll ? savedPosition : { x: 0, y: 0 }
-})
-
-router.beforeEach(function(to, _from, next) {
-  if (to.meta.auth && !store.state.isLoggedIn) {
-    next({ name: 'Login' })
-  } else {
-    next()
+  scrollBehavior: (to, _from, savedPosition) => {
+    return (to.meta.saveScroll && savedPosition) || { x: 0, y: 0 }
   }
 })
+
+// router.beforeEach(function(to, _from, next) {
+//   if (to.meta.auth && !store.state.isLoggedIn) {
+//     next({ name: 'Login' })
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

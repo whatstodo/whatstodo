@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ invert }">
     <PageHeader v-if="!fullPage" />
-    <RouterView class="view" />
+    <RouterView class="view" :key="$route.path" />
     <PageFooter v-if="!fullPage" />
   </div>
 </template>
