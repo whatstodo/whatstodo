@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "dompurify": "^2.0.12",
+    "dompurify": "^2.0.17",
     "marked": "^1.1.0",
     "polymorph-js": "^1.0.2",
     "vue": "^2.6.11",
